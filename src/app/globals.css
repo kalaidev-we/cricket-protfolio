@@ -1,26 +1,108 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #0b0f19;
+  --color-secondary: #111827;
+  --color-accent: #ffd700;
+  --color-accent-hover: #e6c200;
+  --color-accent-red: #ff3333;
+  --font-display: var(--font-space-grotesk), sans-serif;
+  --font-sans: var(--font-outfit), sans-serif;
+  
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-scanline: scanline 8s linear infinite;
+  --animate-glow-pulse: glow-pulse 2s infinite alternate;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes glow-pulse {
+  0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.2), inset 0 0 5px rgba(255, 215, 0, 0.1); }
+  100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5), inset 0 0 10px rgba(255, 215, 0, 0.2); }
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #0b0f19;
+  --foreground: #ffffff;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  font-family: var(--font-outfit), Arial, sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0f19;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 215, 0, 0.15);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffd700;
+}
+
+/* Glassmorphism Styles */
+.glassmorphism {
+  background: rgba(17, 24, 39, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glassmorphism-gold {
+  background: rgba(17, 24, 39, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+}
+
+/* Vignette overlay */
+.vignette-overlay {
+  background: radial-gradient(circle, transparent 40%, rgba(11, 15, 25, 0.9) 100%);
+  pointer-events: none;
+}
+
+.vignette-overlay-red {
+  background: radial-gradient(circle, transparent 20%, rgba(15, 0, 0, 0.95) 100%);
+  pointer-events: none;
+}
+
+/* Text glow */
+.text-glow-gold {
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+.text-glow-red {
+  text-shadow: 0 0 12px rgba(255, 51, 51, 0.6);
+}
+
+/* Scanlines and static noise overlay */
+.noise-overlay {
+  background-image: radial-gradient(rgba(255,255,255,0.015) 1px, transparent 0);
+  background-size: 4px 4px;
+  pointer-events: none;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
