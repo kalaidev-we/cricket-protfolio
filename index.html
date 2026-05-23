@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏏</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Optimization -->
+    <title>Jaivigenesh — The Journey Beyond Boundaries | Apple-Inspired Cricket Portfolio</title>
+    <meta name="description" content="Explore the immersive, cinematic journey of Jaivigenesh. An interactive storytelling portfolio showcasing academic growth, mindset, and passion for cricket." />
+    <meta name="keywords" content="Jaivigenesh, Cricket Portfolio, Apple Keynote Aesthetics, Web Audio Synth, Interactive Storytelling, Three.js, GSAP, Lenis" />
+    <meta name="author" content="Jaivigenesh" />
+    
+    <!-- Open Graph Metadata for Social Sharing -->
+    <meta property="og:title" content="Jaivigenesh — The Journey Beyond Boundaries" />
+    <meta property="og:description" content="An interactive storytelling portfolio showcasing academic growth, mindset, and passion for cricket." />
+    <meta property="og:type" content="website" />
+    
+    <!-- Google Fonts: Inter (Body), Outfit (Headings), Syne (Special Title) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800;900&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Global WebGL Background Canvas -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Custom Cursor Overlay -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+    <div class="cursor-glow" id="cursor-glow"></div>
+
+    <!-- Apple-style Sticky Navigation Bar -->
+    <header class="header-nav" id="sticky-header">
+      <div class="nav-container">
+        <a href="#intro" class="nav-logo" id="nav-logo-link">JAIVIGENESH</a>
+        <nav class="nav-links" id="desktop-nav">
+          <a href="#intro" class="nav-item active" data-sec="intro">Intro</a>
+          <a href="#origin" class="nav-item" data-sec="origin">Origin</a>
+          <a href="#school" class="nav-item" data-sec="school">School</a>
+          <a href="#education" class="nav-item" data-sec="education">Education</a>
+          <a href="#cricket" class="nav-item" data-sec="cricket">Cricket</a>
+          <a href="#mindset" class="nav-item" data-sec="mindset">Mindset</a>
+          <a href="#future" class="nav-item" data-sec="future">Future</a>
+        </nav>
+        <div class="nav-actions">
+          <button class="action-btn" id="nav-cta-btn">The Journey</button>
+        </div>
+      </div>
+      <!-- Story Scroll Progress Indicator -->
+      <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="scroll-progress"></div>
+      </div>
+    </header>
+
+    <!-- Minimal Floating Dock Menu (Bottom) -->
+    <div class="floating-dock-wrapper" id="floating-dock">
+      <div class="dock-container">
+        <a href="#intro" class="dock-item" title="Opening Intro" data-sec="intro">
+          <span class="dock-dot"></span><span class="dock-label">Intro</span>
+        </a>
+        <a href="#origin" class="dock-item" title="Origin Story" data-sec="origin">
+          <span class="dock-dot"></span><span class="dock-label">Origin</span>
+        </a>
+        <a href="#school" class="dock-item" title="School Journey" data-sec="school">
+          <span class="dock-dot"></span><span class="dock-label">School</span>
+        </a>
+        <a href="#education" class="dock-item" title="Higher Education" data-sec="education">
+          <span class="dock-dot"></span><span class="dock-label">GCU</span>
+        </a>
+        <a href="#cricket" class="dock-item" title="Cricket Passion" data-sec="cricket">
+          <span class="dock-dot"></span><span class="dock-label">Cricket</span>
+        </a>
+        <a href="#mindset" class="dock-item" title="Mindset" data-sec="mindset">
+          <span class="dock-dot"></span><span class="dock-label">Mindset</span>
+        </a>
+        <a href="#future" class="dock-item" title="Future Vision" data-sec="future">
+          <span class="dock-dot"></span><span class="dock-label">Future</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Premium Audio Controller (Floating Glass Container) -->
+    <div class="audio-controller" id="audio-panel">
+      <button class="audio-toggle-btn" id="audio-toggle" aria-label="Toggle Soundtrack">
+        <div class="sound-wave" id="sound-wave">
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+        </div>
+        <span class="audio-status-text" id="audio-status">Sound Off</span>
+      </button>
+      <div class="audio-slider-container" id="audio-slider-wrap">
+        <input type="range" id="audio-volume" min="0" max="1" step="0.05" value="0.5" aria-label="Volume Slider" />
+      </div>
+    </div>
+
+    <!-- MAIN SCROLL CONTAINER -->
+    <main id="main-content">
+      
+      <!-- CHAPTER 1: Opening Cinematic Intro -->
+      <section id="intro" class="viewport-section hero-section">
+        <div class="grid-overlay"></div>
+        <div class="cinematic-gradient-bg"></div>
+        <div class="section-content text-center">
+          <h1 class="reveal-text headline" id="hero-headline">Every Cricketer Starts Somewhere.</h1>
+          <p class="reveal-text subheadline" id="hero-subheadline">This is the story of Jaivigenesh.</p>
+          <p class="reveal-text description" id="hero-desc">
+            A journey from Vellore streets to Bangalore dreams. Built through discipline, ambition, and passion for the game.
+          </p>
+          <div class="cta-wrapper reveal-text">
+            <a href="#origin" class="magnetic-btn" id="begin-journey-btn">
+              <span>Begin The Journey</span>
+              <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <!-- Mouse interaction instruction -->
+        <div class="scroll-prompt" id="scroll-prompt-hint">
+          <span class="mouse-icon"><span class="mouse-wheel"></span></span>
+          <span class="scroll-text">Scroll to Begin</span>
+        </div>
+      </section>
+
+      <!-- CHAPTER 2: Origin Story -->
+      <section id="origin" class="viewport-section origin-section">
+        <div class="section-content">
+          <div class="origin-grid">
+            <div class="origin-text-panel">
+              <span class="chapter-tag">Chapter I • Origin</span>
+              <h2 class="section-title text-gradient">Born With A Dream</h2>
+              <p class="paragraph-text lead-text">
+                Born in Vellore in 2005, Jaivigenesh spent his childhood growing up in Bangalore — a city that shaped his ambition, discipline, and love for cricket.
+              </p>
+              <p class="paragraph-text">
+                From playing under open skies on dusty neighborhood grounds to chasing bigger dreams in professional academies, every single phase of his life became a vital part of his journey, etching the game deep into his identity.
+              </p>
+            </div>
+            
+            <div class="origin-visual-panel">
+              <div class="glass-visual-card" id="origin-card">
+                <div class="silhouette-container">
+                  <!-- Silhouette of street cricket batsman in a clean artistic vector -->
+                  <svg class="silhouette-svg" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="40" stroke="rgba(0, 194, 255, 0.1)" stroke-width="0.5" />
+                    <!-- Stylized cricket batsman silhouette -->
+                    <path class="silhouette-path" d="M35,80 L40,65 L48,63 L50,50 L45,40 L46,32 L53,32 L56,42 L55,52 L58,62 L65,78 M51,32 C53.5,32 53.5,27 51,27 C48.5,27 48.5,32 51,32 Z M33,52 L45,43 L48,50 L43,62 M48,45 L62,55 L75,68" stroke="url(#cyan-glow-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <!-- Interactive bat path -->
+                    <path class="silhouette-bat" d="M47,46 L30,22 L24,20 L22,23 L28,25 L43,49" fill="url(#bat-grad)" />
+                    <defs>
+                      <linearGradient id="cyan-glow-grad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#00C2FF" stop-opacity="0.8" />
+                        <stop offset="100%" stop-color="#2E8B57" stop-opacity="0.3" />
+                      </linearGradient>
+                      <linearGradient id="bat-grad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#C7D2FE" />
+                        <stop offset="100%" stop-color="#00C2FF" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div class="ambient-dust"></div>
+                  <div class="cityscape-silhouette"></div>
+                </div>
+                <div class="card-caption">Bangalore Streets, 2012</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 3: School Journey (Apple timeline storytelling) -->
+      <section id="school" class="school-section-timeline">
+        <!-- We use GSAP to pin this section and scroll the timeline panels horizontally -->
+        <div class="timeline-sticky-wrapper" id="school-timeline-wrapper">
+          <div class="timeline-header-container">
+            <span class="chapter-tag">Chapter II • Education Foundations</span>
+            <h2 class="timeline-main-title text-gradient">The Academic Timeline</h2>
+          </div>
+          
+          <div class="timeline-track" id="school-timeline-track">
+            <!-- Timeline Line -->
+            <div class="timeline-glow-line" id="timeline-progress-line"></div>
+            
+            <!-- Panel 1: Bettal School -->
+            <div class="timeline-panel" id="panel-school-1">
+              <div class="timeline-node">
+                <div class="node-ring"></div>
+                <span class="node-year">2009 — 2011</span>
+              </div>
+              <div class="glass-timeline-card">
+                <div class="card-glow-bg"></div>
+                <span class="card-stage">Early Childhood</span>
+                <h3>The First Steps</h3>
+                <p>
+                  Jaivigenesh started his educational journey at **Bettal School** during LKG and UKG. Here, the initial seeds of curiosity, socialization, and play were sown.
+                </p>
+                <div class="card-stat">Nursery Foundations</div>
+              </div>
+            </div>
+
+            <!-- Panel 2: Sri Mithri English School -->
+            <div class="timeline-panel" id="panel-school-2">
+              <div class="timeline-node">
+                <div class="node-ring"></div>
+                <span class="node-year">2011 — 2013</span>
+              </div>
+              <div class="glass-timeline-card">
+                <div class="card-glow-bg"></div>
+                <span class="card-stage">Primary Education</span>
+                <h3>Building Foundations</h3>
+                <p>
+                  For 1st and 2nd standard, he studied at **Sri Mithri English School**. This was a crucial stage where reading, logic, and self-confidence began to flourish rapidly.
+                </p>
+                <div class="card-stat">Primary Literacy & Maths</div>
+              </div>
+            </div>
+
+            <!-- Panel 3: New Baldwin International School -->
+            <div class="timeline-panel" id="panel-school-3">
+              <div class="timeline-node">
+                <div class="node-ring"></div>
+                <span class="node-year">2013 — 2021</span>
+              </div>
+              <div class="glass-timeline-card highlighted-card">
+                <div class="card-glow-bg"></div>
+                <span class="card-stage">School Life & Adolescence</span>
+                <h3>Growth & Discipline</h3>
+                <p>
+                  From 3rd to 10th standard, he completed his schooling at the prestigious **New Baldwin International School, Mandur**.
+                </p>
+                <p>
+                  These defining years shaped his personality, lifelong friendships, competitive spirit, and the dedication needed to balance academics with his rising love for sport.
+                </p>
+                <div class="card-stat">Secondary Board Certificate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 4: Higher Education -->
+      <section id="education" class="viewport-section education-section">
+        <div class="spotlight-layer" id="edu-spotlight"></div>
+        <div class="section-content">
+          <div class="education-container">
+            <span class="chapter-tag text-center block">Chapter III • Higher Education</span>
+            <h2 class="section-title text-center text-gradient" id="edu-title">Beyond The Boundary</h2>
+            
+            <div class="edu-card-glass" id="edu-card">
+              <div class="edu-card-content">
+                <div class="edu-badge">GCU</div>
+                <h3 class="edu-degree">4-Year BBAB Degree</h3>
+                <p class="edu-institution">Garden City University, Bangalore</p>
+                
+                <p class="edu-desc">
+                  After completing school, Jaivigenesh recognized the value of leadership, management, and strategic thinking. He pursued engineering before stepping into a broader, modern vision by continuing his academic journey in Business Administration.
+                </p>
+                
+                <div class="edu-grid-details">
+                  <div class="edu-detail-item">
+                    <span class="detail-label">Discipline</span>
+                    <span class="detail-value">Business Administration</span>
+                  </div>
+                  <div class="edu-detail-item">
+                    <span class="detail-label">Focus Area</span>
+                    <span class="detail-value">Leadership & Strategy</span>
+                  </div>
+                  <div class="edu-detail-item">
+                    <span class="detail-label">Duration</span>
+                    <span class="detail-value">4 Years (2022-2026)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="edu-interactive-glow"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 5: Cricket Passion (Immersive 3D & Stats) -->
+      <section id="cricket" class="viewport-section cricket-section">
+        <!-- Interactive 3D Canvas sits behind overlays inside this section -->
+        <div class="cricket-pitch-glow"></div>
+        
+        <div class="section-content full-height-grid">
+          <div class="cricket-left-content">
+            <span class="chapter-tag">Chapter IV • The Passion</span>
+            <h2 class="section-title text-gradient">More Than A Game</h2>
+            <p class="paragraph-text lead-text">
+              Cricket became more than just a sport for Jaivigenesh. It became discipline, emotional expression, high-pressure growth, and core identity.
+            </p>
+            <p class="paragraph-text">
+              Every grueling practice session, every tense match, and every failure or success shaped a resilient mindset. The crease is where strategy meets absolute physical conviction.
+            </p>
+
+            <!-- Scoreboard & Stats Animation -->
+            <div class="scoreboard-glass" id="scoreboard">
+              <div class="scoreboard-header">
+                <span class="live-dot"></span>
+                <span class="scoreboard-title">CAREER STATISTICS</span>
+              </div>
+              <div class="stats-grid">
+                <div class="stat-box">
+                  <div class="stat-number" id="stat-runs" data-target="1840">0</div>
+                  <div class="stat-label">Runs Scored</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-number" id="stat-sr" data-target="142">0</div>
+                  <div class="stat-label">Strike Rate</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-number" id="stat-wickets" data-target="36">0</div>
+                  <div class="stat-label">Wickets Taken</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cricket-right-content">
+            <!-- Instruction for Three.js sphere interaction -->
+            <div class="ball-instruction-glass" id="ball-instruction">
+              <p>Drag the 3D leather ball to inspect stitching and spin</p>
+              <button class="magnetic-btn-sm" id="swing-bat-btn">
+                <span>Swing Bat 🏏</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 6: Mindset Section -->
+      <section id="mindset" class="viewport-section mindset-section">
+        <div class="ambient-spotlight"></div>
+        <div class="section-content text-center">
+          <span class="chapter-tag">Chapter V • Philosophy</span>
+          <div class="quote-container">
+            <span class="quote-mark open-quote">“</span>
+            <h2 class="mindset-quote" id="mindset-quote-text">
+              Pressure Creates Players. Discipline Creates Legends.
+            </h2>
+            <span class="quote-mark close-quote">”</span>
+          </div>
+          <p class="mindset-description" id="mindset-desc">
+            The journey was never about taking shortcuts. It was about consistency, learning, constant patience, and believing in the long-term process.
+          </p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 7: Future Vision -->
+      <section id="future" class="viewport-section future-section">
+        <div class="section-content">
+          <span class="chapter-tag text-center block">Chapter VI • Vision</span>
+          <h2 class="section-title text-center text-gradient">The Journey Continues</h2>
+          <p class="section-desc-center text-center">
+            Focused on growth, leadership, sportsmanship, and building a future filled with opportunities — both inside and outside the boundaries of the field.
+          </p>
+          
+          <div class="future-cards-grid">
+            <div class="future-glass-card" id="future-card-1">
+              <div class="card-icon">⚡</div>
+              <h3>Continuous Training</h3>
+              <p>Refining mechanical techniques, fitness, and game awareness through daily training routines.</p>
+            </div>
+            <div class="future-glass-card" id="future-card-2">
+              <div class="card-icon">📈</div>
+              <h3>Business Leadership</h3>
+              <p>Leveraging learnings from Garden City University to build initiatives, manage sports assets, and lead teams.</p>
+            </div>
+            <div class="future-glass-card" id="future-card-3">
+              <div class="card-icon">🌐</div>
+              <h3>Beyond Boundaries</h3>
+              <p>Creating opportunities to support young athletes, mentor talent, and expand cricket's modern global reach.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 8: Final Ending Scene -->
+      <section id="ending" class="viewport-section ending-section">
+        <div class="stadium-floodlights-end"></div>
+        <div class="section-content text-center">
+          <h2 class="ending-headline text-gradient" id="end-headline">Every Story Begins With Belief.</h2>
+          <h3 class="ending-subheadline" id="end-subheadline">And This Is Just The Beginning.</h3>
+          
+          <div class="ending-cta-row">
+            <button class="magnetic-btn" id="restart-journey-btn">
+              <span>Restart Story</span>
+              <svg class="btn-arrow rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          
+          <footer class="portfolio-footer">
+            <p>© 2026 Jaivigenesh. All Rights Reserved. Built with Precision & Passion.</p>
+          </footer>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Main JavaScript Loader -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
