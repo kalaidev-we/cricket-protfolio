@@ -26,7 +26,7 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
 
     // 1. Scene setup
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x080415, 0.05);
+    scene.fog = new THREE.FogExp2(0x000000, 0.05);
 
     // 2. Camera setup
     const width = container.clientWidth;
@@ -57,9 +57,9 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
     // Leather sphere
     const sphereGeo = new THREE.SphereGeometry(1.2, 64, 64);
     const ballMat = new THREE.MeshStandardMaterial({
-      color: 0x8b0825, // Red leather ball under cyber lights
-      roughness: 0.2,
-      metalness: 0.1,
+      color: 0x8b0825, // Deep crimson leather
+      roughness: 0.22,
+      metalness: 0.08,
       bumpScale: 0.05,
     });
     // Add procedural leather grain texture using a simple canvas bump map
@@ -99,13 +99,12 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
       // Small box for each stitch
       const stitchGeo = new THREE.BoxGeometry(0.04, 0.06, 0.03);
       const stitchMat = new THREE.MeshStandardMaterial({
-        color: 0xd8edf2, // Cyber-looking stitching thread
+        color: 0xeae2c9, // Pale thread color
         roughness: 0.8,
       });
       const stitch = new THREE.Mesh(stitchGeo, stitchMat);
       stitch.position.set(x, y, 0);
       stitch.rotation.z = angle + Math.PI / 2;
-      // Alternate stitch angles slightly for realism
       stitch.rotation.x = (i % 2 === 0 ? 1 : -1) * 0.25;
       seamGroup.add(stitch);
     }
@@ -115,7 +114,7 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
     const ridgeGeo = new THREE.TorusGeometry(1.2, 0.02, 8, 100);
     const ridgeMat = new THREE.MeshStandardMaterial({
       color: 0x6a0218,
-      roughness: 0.3,
+      roughness: 0.35,
     });
     const ridge = new THREE.Mesh(ridgeGeo, ridgeMat);
     ridge.rotation.y = Math.PI / 2;
@@ -129,7 +128,7 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
     // Wood Blade
     const bladeGeo = new THREE.BoxGeometry(0.6, 2.8, 0.25);
     const bladeMat = new THREE.MeshStandardMaterial({
-      color: 0xdfceb5, // Classic willow blade
+      color: 0xdfceb5, // English willow blade
       roughness: 0.35,
       metalness: 0.05,
     });
@@ -141,8 +140,8 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
     // Rubber Handle (wrapping cylinder)
     const handleGeo = new THREE.CylinderGeometry(0.08, 0.08, 1.2, 16);
     const handleMat = new THREE.MeshStandardMaterial({
-      color: 0x0c071d, // Dark midnight indigo grip
-      roughness: 0.65,
+      color: 0x0f0f10, // Matte black handle grip
+      roughness: 0.7,
     });
     const handle = new THREE.Mesh(handleGeo, handleMat);
     handle.position.y = 2.0;
@@ -158,10 +157,10 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
       batGroup.add(ring);
     }
 
-    // Cyber Cyan highlight ring at bottom of handle
+    // Champagne Gold highlight ring at bottom of handle
     const ringAccentMat = new THREE.MeshStandardMaterial({
-      color: 0x00f0ff, // Cyber-Cyan grip band
-      roughness: 0.5,
+      color: 0xd4af37, // Gold grip band
+      roughness: 0.45,
     });
     const accentRingGeo = new THREE.TorusGeometry(0.085, 0.02, 8, 16);
     const accentRing = new THREE.Mesh(accentRingGeo, ringAccentMat);
@@ -173,7 +172,7 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
     batGroup.position.y = -0.5;
     modelGroup.add(batGroup);
 
-    // 7. Ambient Cyber Dust Particles
+    // 7. Ambient Gold Dust Particles
     const particleCount = 200;
     const particleGeo = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
@@ -184,34 +183,34 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
     }
     particleGeo.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
     const particleMat = new THREE.PointsMaterial({
-      color: 0x00f0ff, // Cyan dust
-      size: 0.03,
+      color: 0xd4af37, // Champagne Gold dust
+      size: 0.035,
       transparent: true,
-      opacity: 0.45,
+      opacity: 0.4,
       blending: THREE.AdditiveBlending,
     });
     const dustParticles = new THREE.Points(particleGeo, particleMat);
     scene.add(dustParticles);
 
     // 8. Lights
-    // Ambient light for general visibility
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.15);
+    // Ambient light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
     scene.add(ambientLight);
 
-    // Key Spotlight (Cyber Cyan) from top right
-    const cyanSpotlight = new THREE.SpotLight(0x00f0ff, 20, 20, Math.PI / 6, 0.5, 1);
-    cyanSpotlight.position.set(4, 5, 4);
-    cyanSpotlight.castShadow = true;
-    scene.add(cyanSpotlight);
+    // Key Spotlight (Studio White) from top right
+    const whiteSpotlight = new THREE.SpotLight(0xffffff, 25, 20, Math.PI / 6, 0.5, 1);
+    whiteSpotlight.position.set(4, 5, 4);
+    whiteSpotlight.castShadow = true;
+    scene.add(whiteSpotlight);
 
-    // Rim Spotlight (Neon Green) from top-back left for dramatic edges
-    const greenSpotlight = new THREE.SpotLight(0x39ff14, 25, 25, Math.PI / 5, 0.2, 1);
-    greenSpotlight.position.set(-5, 4, -4);
-    greenSpotlight.castShadow = true;
-    scene.add(greenSpotlight);
+    // Rim Spotlight (Champagne Gold) from top-back left
+    const goldSpotlight = new THREE.SpotLight(0xd4af37, 20, 25, Math.PI / 5, 0.2, 1);
+    goldSpotlight.position.set(-5, 4, -4);
+    goldSpotlight.castShadow = true;
+    scene.add(goldSpotlight);
 
     // Front fill light
-    const fillLight = new THREE.DirectionalLight(0x708090, 1.2);
+    const fillLight = new THREE.DirectionalLight(0xffffff, 1.0);
     fillLight.position.set(0, -3, 3);
     scene.add(fillLight);
 
@@ -244,10 +243,9 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
         ballGroup.visible = true;
         batGroup.visible = false;
         
-        // Dynamic rotations for ball
-        ballGroup.rotation.y = elapsedTime * 0.2 + scrollProgress * Math.PI * 4;
-        ballGroup.rotation.x = scrollProgress * Math.PI + mouseY * 0.5;
-        ballGroup.rotation.z = mouseX * 0.5;
+        ballGroup.rotation.y = elapsedTime * 0.15 + scrollProgress * Math.PI * 4;
+        ballGroup.rotation.x = scrollProgress * Math.PI + mouseY * 0.4;
+        ballGroup.rotation.z = mouseX * 0.4;
         
         ballGroup.position.set(0, 0, 0);
         camera.position.set(0, 0, 5.5);
@@ -255,10 +253,9 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
         ballGroup.visible = false;
         batGroup.visible = true;
 
-        // Dynamic rotations for bat
-        batGroup.rotation.y = elapsedTime * 0.3 + scrollProgress * Math.PI * 2 + mouseX * 0.8;
-        batGroup.rotation.z = Math.sin(elapsedTime * 0.5) * 0.05 + mouseY * 0.3;
-        batGroup.rotation.x = 0.2 + scrollProgress * 0.5;
+        batGroup.rotation.y = elapsedTime * 0.2 + scrollProgress * Math.PI * 2 + mouseX * 0.7;
+        batGroup.rotation.z = Math.sin(elapsedTime * 0.5) * 0.04 + mouseY * 0.25;
+        batGroup.rotation.x = 0.1 + scrollProgress * 0.5;
 
         batGroup.position.set(0, 0, 0);
         camera.position.set(0, 0, 6.5);
@@ -267,23 +264,23 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
         batGroup.visible = true;
 
         ballGroup.position.set(-1.8, 0, 0);
-        ballGroup.rotation.y = elapsedTime * 0.3 + scrollProgress * Math.PI * 3;
-        ballGroup.rotation.x = mouseY * 0.4;
+        ballGroup.rotation.y = elapsedTime * 0.25 + scrollProgress * Math.PI * 3;
+        ballGroup.rotation.x = mouseY * 0.3;
 
         batGroup.position.set(1.5, -0.2, 0);
-        batGroup.rotation.y = elapsedTime * 0.2 + scrollProgress * Math.PI + mouseX * 0.5;
-        batGroup.rotation.z = -0.2 + mouseY * 0.2;
+        batGroup.rotation.y = elapsedTime * 0.15 + scrollProgress * Math.PI + mouseX * 0.4;
+        batGroup.rotation.z = -0.2 + mouseY * 0.15;
 
         camera.position.set(0, 0, 7.5);
       }
 
       // Rotate particles slightly for background float effect
-      dustParticles.rotation.y = elapsedTime * 0.02;
-      dustParticles.rotation.x = elapsedTime * 0.01;
+      dustParticles.rotation.y = elapsedTime * 0.015;
+      dustParticles.rotation.x = elapsedTime * 0.008;
 
-      // Animate spotlight intensity for breathing cyber lights
-      cyanSpotlight.intensity = 20 + Math.sin(elapsedTime * 1.5) * 4;
-      greenSpotlight.intensity = 25 + Math.cos(elapsedTime * 2.0) * 5;
+      // Animate spotlights
+      whiteSpotlight.intensity = 25 + Math.sin(elapsedTime * 1.5) * 3;
+      goldSpotlight.intensity = 20 + Math.cos(elapsedTime * 2.0) * 4;
 
       renderer.render(scene, camera);
     };

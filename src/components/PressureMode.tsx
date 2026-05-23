@@ -8,7 +8,7 @@ import confetti from "canvas-confetti";
 export default function PressureMode() {
   const [isActive, setIsActive] = useState(false);
   const [gameState, setGameState] = useState<"intro" | "playing" | "result">("intro");
-  const [timeLeft, setTimeLeft] = useState(10.00); // 10 seconds
+  const [timeLeft, setTimeLeft] = useState(10.00);
   const [selectedShot, setSelectedShot] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -26,7 +26,7 @@ export default function PressureMode() {
   // Countdown timer logic
   useEffect(() => {
     if (isActive && gameState === "playing") {
-      const interval = 50; // update every 50ms for milliseconds granularity
+      const interval = 50;
       timerRef.current = setInterval(() => {
         setTimeLeft((prev) => {
           if (prev <= 0.05) {
@@ -44,10 +44,8 @@ export default function PressureMode() {
     };
   }, [isActive, gameState]);
 
-  // Handle timeout (user fails to choose in time)
   const handleTimeout = () => {
     AudioEngine.playBatHit();
-    // Simulate bowled
     setSelectedShot("TIMEOUT");
     setGameState("result");
     AudioEngine.stopHeartbeat();
@@ -69,18 +67,16 @@ export default function PressureMode() {
     setSelectedShot(shot);
     setGameState("result");
 
-    // Stop intense heartbeat, play bat hit, trigger cinematic outcomes
     AudioEngine.stopHeartbeat();
     AudioEngine.playBatHit();
 
     if (shot === "helicopter") {
-      // Trigger victory confetti!
       setTimeout(() => {
         confetti({
           particleCount: 150,
           spread: 80,
           origin: { y: 0.6 },
-          colors: ["#ffd700", "#ffffff", "#111827"],
+          colors: ["#d4af37", "#ffffff", "#000000"],
         });
       }, 300);
     } else {
@@ -98,7 +94,6 @@ export default function PressureMode() {
     AudioEngine.stopCrowdAmbience();
   };
 
-  // Get results text and statuses
   const getOutcomeData = () => {
     switch (selectedShot) {
       case "helicopter":
@@ -146,163 +141,156 @@ export default function PressureMode() {
     <section 
       className={`relative w-full rounded-2xl border transition-all duration-700 overflow-hidden ${
         isActive 
-          ? "border-accent-red/40 bg-black/95 shadow-[0_0_50px_rgba(255,51,51,0.15)]" 
-          : "border-white/5 bg-secondary/40 shadow-xl"
+          ? "border-accent-red/20 bg-black/95 shadow-[0_0_40px_rgba(225,29,72,0.1)]" 
+          : "border-white/5 bg-secondary/20 shadow-xl"
       }`}
       id="pressure-mode"
     >
-      {/* Dynamic Ambient Color Rings */}
       <div 
         className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full filter blur-[120px] pointer-events-none transition-all duration-1000 ${
           isActive 
-            ? "w-96 h-96 bg-accent-red/10 scale-125" 
-            : "w-64 h-64 bg-accent/5"
+            ? "w-96 h-96 bg-accent-red/5 scale-125" 
+            : "w-64 h-64 bg-accent/3"
         }`} 
       />
 
-      {/* Grid Scanline Overlays for Pressure Vibe */}
       {isActive && (
         <>
-          <div className="absolute inset-0 noise-overlay opacity-50 pointer-events-none animate-pulse-slow" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-red-950/5 to-black pointer-events-none" />
-          {/* Animated red alert line */}
-          <div className="absolute left-0 top-0 w-full h-[2px] bg-accent-red/60 shadow-[0_0_10px_#ff3333] pointer-events-none animate-scanline" />
-          {/* Screen vignette */}
+          <div className="absolute inset-0 noise-overlay opacity-30 pointer-events-none" />
+          <div className="absolute left-0 top-0 w-full h-[0.5px] bg-accent-red/50 pointer-events-none animate-scanline" />
           <div className="absolute inset-0 vignette-overlay-red pointer-events-none" />
         </>
       )}
 
-      {/* Header bar */}
+      {/* Header */}
       <div className="p-6 md:p-8 flex items-center justify-between border-b border-white/5 relative z-10">
         <div className="flex items-center gap-3">
-          <div className={`p-2 rounded-lg transition-colors duration-500 ${isActive ? "bg-accent-red/20 text-accent-red" : "bg-accent/15 text-accent"}`}>
-            <ShieldAlert className="w-5 h-5" />
+          <div className={`p-2 rounded-lg transition-colors duration-500 ${isActive ? "bg-accent-red/10 text-accent-red" : "bg-accent/10 text-accent"}`}>
+            <ShieldAlert className="w-4.5 h-4.5" />
           </div>
           <div>
-            <span className={`text-xs font-semibold tracking-widest uppercase transition-colors duration-500 ${isActive ? "text-accent-red text-glow-red" : "text-accent"}`}>
+            <span className={`text-[9px] font-bold tracking-widest uppercase transition-colors duration-500 font-mono ${isActive ? "text-accent-red text-glow-red" : "text-accent"}`}>
               {isActive ? "Tension Experience Active" : "Interactive Simulation"}
             </span>
-            <h2 className="text-xl md:text-2xl font-bold tracking-tight mt-0.5 font-display">
+            <h2 className="text-xl font-bold tracking-tight mt-0.5 font-display">
               THE PRESSURE VALVE
             </h2>
           </div>
         </div>
         <button
           onClick={handleMuteToggle}
-          className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/70 hover:text-white transition-all"
-          title={isMuted ? "Unmute Sound" : "Mute Sound"}
+          className="p-2 rounded bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
         >
-          {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+          {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
         </button>
       </div>
 
       {/* Game Stages */}
-      <div className="p-6 md:p-8 min-h-[300px] flex flex-col justify-center items-center relative z-10">
+      <div className="p-6 md:p-8 min-h-[250px] flex flex-col justify-center items-center relative z-10">
         {gameState === "intro" && (
-          <div className="text-center max-w-xl flex flex-col items-center">
-            <AlertTriangle className="w-12 h-12 text-accent mb-4 animate-bounce" />
-            <h3 className="text-lg md:text-xl font-bold tracking-tight text-white mb-2">
+          <div className="text-center max-w-lg flex flex-col items-center">
+            <AlertTriangle className="w-10 h-10 text-accent mb-4 animate-bounce" />
+            <h3 className="text-sm font-bold tracking-tight text-white mb-2 uppercase font-display">
               Final Ball. 6 Runs Needed. 95,000 Cheering.
             </h3>
-            <p className="text-xs md:text-sm text-white/60 leading-relaxed mb-6">
+            <p className="text-xs text-white/50 leading-relaxed mb-6">
               Step into the shoes of the national team's finisher. Your heartbeat is echoing. The bowler runs in. You have exactly 10 seconds to read the delivery and choose your stroke. Will you become a legend or succumb to the pressure?
             </p>
             <button
               onClick={startPressureMode}
-              className="px-8 py-3.5 bg-accent hover:bg-accent-hover text-primary font-black rounded-lg text-sm tracking-wider uppercase transition-all duration-300 flex items-center gap-2.5 shadow-lg shadow-accent/10 hover:shadow-accent/25 hover:scale-[1.02]"
+              className="px-6 py-3 bg-accent hover:bg-accent-hover text-primary font-bold rounded text-xs tracking-widest uppercase transition-all duration-300 flex items-center gap-2 shadow-md shadow-accent/15"
             >
-              <Play className="w-4 h-4 fill-primary" /> Enter Pressure Mode
+              <Play className="w-3.5 h-3.5 fill-primary" /> Enter Pressure Mode
             </button>
           </div>
         )}
 
         {gameState === "playing" && (
           <div className="w-full text-center flex flex-col items-center">
-            {/* Warning indicator */}
-            <div className="flex items-center gap-2 px-3 py-1 bg-accent-red/20 border border-accent-red/30 rounded-full mb-6">
-              <span className="w-1.5 h-1.5 bg-accent-red rounded-full animate-ping" />
-              <span className="text-[10px] text-accent-red font-bold tracking-widest uppercase font-mono">
+            <div className="flex items-center gap-1.5 px-3 py-1 bg-accent-red/10 border border-accent-red/20 rounded-full mb-6">
+              <span className="w-1 h-1 bg-accent-red rounded-full animate-ping" />
+              <span className="text-[8px] text-accent-red font-bold tracking-widest uppercase font-mono">
                 Decide Now: Yorker Pitching Outside Off Stump
               </span>
             </div>
 
             {/* Giant countdown timer */}
-            <div className="mb-8 select-none">
-              <span className="text-6xl md:text-7xl font-black font-mono tracking-tighter text-glow-red text-accent-red">
+            <div className="mb-6 select-none">
+              <span className="text-5xl md:text-6xl font-black font-mono tracking-tighter text-glow-red text-accent-red">
                 {timeLeft.toFixed(2)}
               </span>
-              <span className="text-xs text-white/40 block mt-1 font-mono uppercase tracking-widest">
+              <span className="text-[8px] text-white/40 block mt-1 font-mono uppercase tracking-widest">
                 Seconds Remaining
               </span>
             </div>
 
             {/* Shot Choices */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full max-w-2xl">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full max-w-xl">
               <button
                 onClick={() => handleShotSelection("cover_drive")}
-                className="py-4 px-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-accent transition-all duration-300 font-bold text-xs uppercase tracking-wider flex flex-col items-center gap-2 group"
+                className="py-3 px-2.5 rounded-lg border border-white/5 bg-secondary/40 hover:bg-white/5 hover:border-accent transition-all duration-300 font-bold text-[10px] uppercase tracking-wider flex flex-col items-center gap-1.5 group"
               >
                 <span className="text-white group-hover:text-accent font-display">Cover Drive</span>
-                <span className="text-[9px] text-white/40 group-hover:text-white/60 font-medium">Safe Stroke (Mids)</span>
+                <span className="text-[8px] text-white/40 group-hover:text-white/60 font-mono">Safe Stroke</span>
               </button>
               <button
                 onClick={() => handleShotSelection("pull")}
-                className="py-4 px-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-accent transition-all duration-300 font-bold text-xs uppercase tracking-wider flex flex-col items-center gap-2 group"
+                className="py-3 px-2.5 rounded-lg border border-white/5 bg-secondary/40 hover:bg-white/5 hover:border-accent transition-all duration-300 font-bold text-[10px] uppercase tracking-wider flex flex-col items-center gap-1.5 group"
               >
                 <span className="text-white group-hover:text-accent font-display">Pull Shot</span>
-                <span className="text-[9px] text-white/40 group-hover:text-white/60 font-medium">High Risk (Bouncers)</span>
+                <span className="text-[8px] text-white/40 group-hover:text-white/60 font-mono">High Risk</span>
               </button>
               <button
                 onClick={() => handleShotSelection("helicopter")}
-                className="py-4 px-3 rounded-xl border border-accent/20 bg-accent/5 hover:bg-accent/15 hover:border-accent transition-all duration-300 font-bold text-xs uppercase tracking-wider flex flex-col items-center gap-2 group shadow-[0_0_15px_rgba(255,215,0,0.05)]"
+                className="py-3 px-2.5 rounded-lg border border-accent/20 bg-accent/5 hover:bg-accent/15 hover:border-accent transition-all duration-300 font-bold text-[10px] uppercase tracking-wider flex flex-col items-center gap-1.5 group"
               >
-                <span className="text-accent text-glow-gold font-display">Helicopter Shot</span>
-                <span className="text-[9px] text-accent/50 group-hover:text-accent/80 font-medium">Power Hit (Yorkers)</span>
+                <span className="text-accent text-glow-accent font-display">Helicopter</span>
+                <span className="text-[8px] text-accent/50 group-hover:text-accent/80 font-mono">Power Hit</span>
               </button>
               <button
                 onClick={() => handleShotSelection("sweep")}
-                className="py-4 px-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-accent transition-all duration-300 font-bold text-xs uppercase tracking-wider flex flex-col items-center gap-2 group"
+                className="py-3 px-2.5 rounded-lg border border-white/5 bg-secondary/40 hover:bg-white/5 hover:border-accent transition-all duration-300 font-bold text-[10px] uppercase tracking-wider flex flex-col items-center gap-1.5 group"
               >
                 <span className="text-white group-hover:text-accent font-display">Sweep Shot</span>
-                <span className="text-[9px] text-white/40 group-hover:text-white/60 font-medium">Low Angle (Spins)</span>
+                <span className="text-[8px] text-white/40 group-hover:text-white/60 font-mono">Low Angle</span>
               </button>
             </div>
           </div>
         )}
 
         {gameState === "result" && (
-          <div className="text-center max-w-xl flex flex-col items-center animate-fade-in">
+          <div className="text-center max-w-lg flex flex-col items-center">
             {outcome.success ? (
-              <div className="w-12 h-12 bg-accent/20 border border-accent/40 rounded-full flex items-center justify-center text-accent mb-4 animate-bounce">
-                <Award className="w-6 h-6" />
+              <div className="w-10 h-10 bg-accent/10 border border-accent/30 rounded-full flex items-center justify-center text-accent mb-4 animate-bounce">
+                <Award className="w-5 h-5" />
               </div>
             ) : (
-              <div className="w-12 h-12 bg-accent-red/20 border border-accent-red/40 rounded-full flex items-center justify-center text-accent-red mb-4">
-                <AlertTriangle className="w-6 h-6 animate-pulse" />
+              <div className="w-10 h-10 bg-accent-red/10 border border-accent-red/30 rounded-full flex items-center justify-center text-accent-red mb-4">
+                <AlertTriangle className="w-5 h-5" />
               </div>
             )}
             
-            <h3 className={`text-xl md:text-2xl font-black font-display tracking-tight mb-2 uppercase ${outcome.success ? "text-accent text-glow-gold" : "text-accent-red text-glow-red"}`}>
+            <h3 className={`text-lg md:text-xl font-bold font-display tracking-tight mb-2 uppercase ${outcome.success ? "text-accent text-glow-accent" : "text-accent-red"}`}>
               {outcome.title}
             </h3>
 
-            <span className={`px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider mb-4 border ${
+            <span className={`px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider mb-4 border ${
               outcome.success 
-                ? "bg-emerald-950/50 border-emerald-500/30 text-emerald-400" 
-                : "bg-red-950/50 border-red-500/30 text-red-400"
+                ? "bg-emerald-950/20 border-emerald-500/20 text-emerald-400 font-mono" 
+                : "bg-red-950/20 border-red-500/20 text-red-400 font-mono"
             }`}>
               {outcome.actionText}
             </span>
 
-            <p className="text-xs md:text-sm text-white/70 leading-relaxed mb-6 border-t border-white/5 pt-4">
+            <p className="text-xs text-white/60 leading-relaxed mb-6 border-t border-white/5 pt-4">
               {outcome.desc}
             </p>
 
             <button
               onClick={resetGame}
-              className="px-6 py-2.5 bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5"
+              className="px-5 py-2 bg-white/5 hover:bg-white/10 text-white border border-white/5 rounded text-xs font-semibold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5"
             >
-              <RotateCcw className="w-3.5 h-3.5" /> Replay Scenario
+              <RotateCcw className="w-3 h-3" /> Replay Scenario
             </button>
           </div>
         )}
