@@ -54,8 +54,11 @@ export default function Achievements() {
         {achievements.map((ach, idx) => (
           <div
             key={idx}
-            className="bg-secondary/40 p-6 rounded-xl border border-white/5 hover:border-accent/20 transition-all duration-300 relative group overflow-hidden flex flex-col sm:flex-row gap-5 items-start"
+            className="bg-secondary/40 p-6 rounded-xl border border-white/5 hover:border-accent/20 transition-all duration-300 relative group overflow-hidden flex flex-col sm:flex-row gap-5 items-start shadow-[0_4px_20px_rgba(0,0,0,0.15)]"
           >
+            {/* Background cyber accent design */}
+            <div className="absolute -top-12 -right-12 w-24 h-24 bg-accent/5 rounded-full filter blur-xl group-hover:bg-accent/10 transition-colors" />
+
             {/* Glowing Icon Block */}
             <div className="p-3.5 rounded-lg bg-black/40 border border-white/10 text-accent group-hover:border-accent/40 transition-all duration-300 flex items-center justify-center flex-shrink-0">
               {ach.icon}
@@ -69,7 +72,7 @@ export default function Achievements() {
                     {ach.awarder}
                   </span>
                   <span className="text-white/40 text-[9px] font-mono flex items-center gap-1">
-                    <Calendar className="w-3 h-3" /> {ach.year}
+                    <Calendar className="w-3.5 h-3.5" /> {ach.year}
                   </span>
                 </div>
                 <h3 className="text-white text-sm font-bold tracking-tight font-display uppercase group-hover:text-accent transition-colors duration-300">
@@ -82,7 +85,7 @@ export default function Achievements() {
 
               {/* Status citation bottom */}
               <div className="flex items-center gap-1.5 mt-3 text-[10px] text-white/70 font-semibold uppercase tracking-wider font-mono">
-                <CheckCircle2 className="w-3.5 h-3.5 text-accent flex-shrink-0" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-accent-green flex-shrink-0 text-glow-green" />
                 <span>Verified Benchmark: <span className="text-accent text-glow-accent">{ach.metric}</span></span>
               </div>
             </div>

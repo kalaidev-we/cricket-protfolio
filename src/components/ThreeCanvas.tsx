@@ -26,7 +26,7 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
 
     // 1. Scene setup
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x000000, 0.05);
+    scene.fog = new THREE.FogExp2(0x050816, 0.05);
 
     // 2. Camera setup
     const width = container.clientWidth;
@@ -57,7 +57,7 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
     // Leather sphere
     const sphereGeo = new THREE.SphereGeometry(1.2, 64, 64);
     const ballMat = new THREE.MeshStandardMaterial({
-      color: 0x8b0825, // Deep crimson leather
+      color: 0x85051e, // Crimson leather ball under stadium lights
       roughness: 0.22,
       metalness: 0.08,
       bumpScale: 0.05,
@@ -99,7 +99,7 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
       // Small box for each stitch
       const stitchGeo = new THREE.BoxGeometry(0.04, 0.06, 0.03);
       const stitchMat = new THREE.MeshStandardMaterial({
-        color: 0xeae2c9, // Pale thread color
+        color: 0xe3edf0, // Pale light blue seam thread
         roughness: 0.8,
       });
       const stitch = new THREE.Mesh(stitchGeo, stitchMat);
@@ -113,7 +113,7 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
     // Add seam ridge (raised leather lip)
     const ridgeGeo = new THREE.TorusGeometry(1.2, 0.02, 8, 100);
     const ridgeMat = new THREE.MeshStandardMaterial({
-      color: 0x6a0218,
+      color: 0x620214,
       roughness: 0.35,
     });
     const ridge = new THREE.Mesh(ridgeGeo, ridgeMat);
@@ -128,7 +128,7 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
     // Wood Blade
     const bladeGeo = new THREE.BoxGeometry(0.6, 2.8, 0.25);
     const bladeMat = new THREE.MeshStandardMaterial({
-      color: 0xdfceb5, // English willow blade
+      color: 0xdfceb5, // English willow wood
       roughness: 0.35,
       metalness: 0.05,
     });
@@ -140,8 +140,8 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
     // Rubber Handle (wrapping cylinder)
     const handleGeo = new THREE.CylinderGeometry(0.08, 0.08, 1.2, 16);
     const handleMat = new THREE.MeshStandardMaterial({
-      color: 0x0f0f10, // Matte black handle grip
-      roughness: 0.7,
+      color: 0x070c18, // Midnight navy rubber grip
+      roughness: 0.65,
     });
     const handle = new THREE.Mesh(handleGeo, handleMat);
     handle.position.y = 2.0;
@@ -157,9 +157,9 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
       batGroup.add(ring);
     }
 
-    // Champagne Gold highlight ring at bottom of handle
+    // Scoreboard Blue highlight ring at bottom of handle
     const ringAccentMat = new THREE.MeshStandardMaterial({
-      color: 0xd4af37, // Gold grip band
+      color: 0x38bdf8, // Scoreboard Blue grip band
       roughness: 0.45,
     });
     const accentRingGeo = new THREE.TorusGeometry(0.085, 0.02, 8, 16);
@@ -172,7 +172,7 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
     batGroup.position.y = -0.5;
     modelGroup.add(batGroup);
 
-    // 7. Ambient Gold Dust Particles
+    // 7. Ambient Soft Cyan Dust Particles
     const particleCount = 200;
     const particleGeo = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
@@ -183,8 +183,8 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
     }
     particleGeo.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
     const particleMat = new THREE.PointsMaterial({
-      color: 0xd4af37, // Champagne Gold dust
-      size: 0.035,
+      color: 0x8be9fd, // Soft stadium light cyan dust
+      size: 0.03,
       transparent: true,
       opacity: 0.4,
       blending: THREE.AdditiveBlending,
@@ -192,27 +192,27 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
     const dustParticles = new THREE.Points(particleGeo, particleMat);
     scene.add(dustParticles);
 
-    // 8. Lights
+    // 8. Stadium Spotlights setup
     // Ambient light
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
     scene.add(ambientLight);
 
-    // Key Spotlight (Studio White) from top right
-    const whiteSpotlight = new THREE.SpotLight(0xffffff, 25, 20, Math.PI / 6, 0.5, 1);
+    // Key Floodlight (Floodlight White) from top right
+    const whiteSpotlight = new THREE.SpotLight(0xf8fafc, 25, 20, Math.PI / 6, 0.5, 1);
     whiteSpotlight.position.set(4, 5, 4);
     whiteSpotlight.castShadow = true;
     scene.add(whiteSpotlight);
 
-    // Rim Spotlight (Champagne Gold) from top-back left
-    const goldSpotlight = new THREE.SpotLight(0xd4af37, 20, 25, Math.PI / 5, 0.2, 1);
-    goldSpotlight.position.set(-5, 4, -4);
-    goldSpotlight.castShadow = true;
-    scene.add(goldSpotlight);
+    // Rim Backlight (Soft Cyan Stadium Light) from top-back left
+    const cyanSpotlight = new THREE.SpotLight(0x8be9fd, 22, 25, Math.PI / 5, 0.2, 1);
+    cyanSpotlight.position.set(-5, 4, -4);
+    cyanSpotlight.castShadow = true;
+    scene.add(cyanSpotlight);
 
-    // Front fill light
-    const fillLight = new THREE.DirectionalLight(0xffffff, 1.0);
-    fillLight.position.set(0, -3, 3);
-    scene.add(fillLight);
+    // Turf Green Grass reflection bounce fill light from front bottom
+    const greenBounceLight = new THREE.DirectionalLight(0x2ecc71, 1.2);
+    greenBounceLight.position.set(0, -3, 3);
+    scene.add(greenBounceLight);
 
     // 9. Interactive mouse offsets
     let mouseX = 0;
@@ -280,7 +280,7 @@ export default function ThreeCanvas({ activeView = "ball", scrollProgress = 0 }:
 
       // Animate spotlights
       whiteSpotlight.intensity = 25 + Math.sin(elapsedTime * 1.5) * 3;
-      goldSpotlight.intensity = 20 + Math.cos(elapsedTime * 2.0) * 4;
+      cyanSpotlight.intensity = 22 + Math.cos(elapsedTime * 2.0) * 4;
 
       renderer.render(scene, camera);
     };

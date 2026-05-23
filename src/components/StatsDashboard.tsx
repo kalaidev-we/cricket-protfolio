@@ -42,11 +42,11 @@ function AnimatedCounter({ label, value, suffix = "", decimals = 0, duration = 1
   }, [value, duration]);
 
   return (
-    <div className="bg-secondary/20 border border-white/5 hover:border-accent/10 rounded-xl p-5 transition-all duration-300 group hover:bg-white/[0.02]">
+    <div className="bg-secondary/40 border border-white/5 hover:border-accent/20 rounded-xl p-5 transition-all duration-300 group hover:bg-white/[0.02] shadow-md">
       <span className="text-white/40 text-[10px] md:text-xs font-semibold tracking-widest uppercase block mb-1">
         {label}
       </span>
-      <span className="text-2xl md:text-3xl font-extrabold tracking-tight text-white font-display group-hover:text-accent transition-colors duration-300">
+      <span className="text-2xl md:text-3xl font-extrabold tracking-tight text-white font-display group-hover:text-accent transition-colors duration-300 text-glow-accent">
         {count.toFixed(decimals)}
         {suffix}
       </span>
@@ -72,7 +72,7 @@ export default function StatsDashboard() {
     { id: "fine_leg", name: "Fine Leg / Square Leg", runs: 258, percent: "14%", desc: "Glances off the pads and sweep shots playing behind square on the leg-side.", path: "M 100 80 L 100 10 A 70 70 0 0 0 50 30 Z" }
   ];
 
-  // Performance line chart coordinates (Last 8 University League matches: 42, 68, 114, 55, 87, 98, 73, 91)
+  // Performance line chart coordinates (Last 8 University League matches)
   const chartData = [42, 68, 114, 55, 87, 98, 73, 91];
   const chartWidth = 500;
   const chartHeight = 120;
@@ -87,12 +87,12 @@ export default function StatsDashboard() {
 
   return (
     <section className="bg-secondary/20 p-6 md:p-8 rounded-2xl w-full border border-white/5 relative overflow-hidden" id="statistics">
-      {/* Background subtle gold glow */}
+      {/* Background subtle scoreboard glow */}
       <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-accent/3 rounded-full filter blur-[150px] pointer-events-none" />
       
       <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 pb-4 border-b border-white/10 gap-4">
         <div>
-          <span className="text-accent text-xs font-bold tracking-widest uppercase flex items-center gap-1.5 font-mono">
+          <span className="text-accent text-xs font-bold tracking-widest uppercase flex items-center gap-1.5 font-mono text-glow-accent">
             <BarChart2 className="w-4 h-4" /> Career Analytics
           </span>
           <h2 className="text-xl md:text-2xl font-bold tracking-tight mt-1 font-display">
@@ -100,7 +100,7 @@ export default function StatsDashboard() {
           </h2>
         </div>
         <div className="flex items-center gap-2 text-white/40 text-xs font-mono">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-accent-green animate-pulse" />
           <span>GCU Sports Records: Live 2026</span>
         </div>
       </div>
@@ -114,7 +114,7 @@ export default function StatsDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* INTERACTIVE WAGON WHEEL: Left/Mid Panel */}
+        {/* INTERACTIVE WAGON WHEEL */}
         <div className="lg:col-span-6 bg-black/40 border border-white/5 rounded-xl p-6 flex flex-col items-center relative overflow-hidden">
           <h3 className="text-xs font-bold uppercase tracking-wider text-white/80 self-start mb-6 flex items-center gap-1.5 font-mono">
             <Compass className="w-4 h-4 text-accent" /> Interactive Wagon Wheel
@@ -139,8 +139,8 @@ export default function StatsDashboard() {
                 <path
                   key={reg.id}
                   d={reg.path}
-                  fill={activeRegion?.name === reg.name ? "rgba(212, 175, 55, 0.15)" : "rgba(255, 255, 255, 0.005)"}
-                  stroke={activeRegion?.name === reg.name ? "#d4af37" : "rgba(255,255,255,0.08)"}
+                  fill={activeRegion?.name === reg.name ? "rgba(56, 189, 248, 0.15)" : "rgba(255, 255, 255, 0.005)"}
+                  stroke={activeRegion?.name === reg.name ? "#38bdf8" : "rgba(255,255,255,0.08)"}
                   strokeWidth={activeRegion?.name === reg.name ? "1.5" : "0.5"}
                   className="cursor-pointer transition-all duration-300"
                   onMouseEnter={() => setActiveRegion(reg)}
@@ -160,7 +160,7 @@ export default function StatsDashboard() {
                   <span className="bg-accent/10 text-accent text-[9px] font-bold px-1.5 py-0.5 rounded font-mono">{activeRegion.percent} runs</span>
                 </div>
                 <p className="text-[10px] text-white/60 max-w-sm leading-relaxed">{activeRegion.desc}</p>
-                <div className="text-[10px] text-accent font-extrabold mt-1 font-mono">{activeRegion.runs} Runs</div>
+                <div className="text-[10px] text-accent font-extrabold mt-1 font-mono text-glow-accent">{activeRegion.runs} Runs</div>
               </div>
             ) : (
               <p className="text-[10px] text-white/40 italic leading-relaxed">
@@ -170,7 +170,7 @@ export default function StatsDashboard() {
           </div>
         </div>
 
-        {/* RUN TRENDS & ADDITIONAL INSIGHTS: Right Panel */}
+        {/* RUN TRENDS: Right Panel */}
         <div className="lg:col-span-6 flex flex-col gap-6 w-full">
           {/* Performance line chart */}
           <div className="bg-black/40 border border-white/5 rounded-xl p-6 flex flex-col">
@@ -191,12 +191,12 @@ export default function StatsDashboard() {
                 {/* Glowing Trend Line */}
                 <polyline
                   fill="none"
-                  stroke="#d4af37"
+                  stroke="#38bdf8"
                   strokeWidth="2.5"
                   points={points}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="drop-shadow-[0_0_6px_rgba(212,175,55,0.4)]"
+                  className="drop-shadow-[0_0_6px_rgba(56,189,248,0.4)]"
                 />
 
                 {/* Data Points */}
@@ -209,15 +209,15 @@ export default function StatsDashboard() {
                         cx={x}
                         cy={y}
                         r="3"
-                        fill="#000000"
-                        stroke="#d4af37"
+                        fill="#050816"
+                        stroke="#38bdf8"
                         strokeWidth="1.5"
                       />
                       <circle
                         cx={x}
                         cy={y}
                         r="6"
-                        fill="#d4af37"
+                        fill="#38bdf8"
                         className="opacity-0 group-hover/dot:opacity-15 transition-all duration-200"
                       />
                     </g>
@@ -236,33 +236,33 @@ export default function StatsDashboard() {
 
           {/* Highlights & Additional Stats */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-black/40 border border-white/5 rounded-xl p-4 flex flex-col justify-between">
+            <div className="bg-black/40 border border-white/5 rounded-xl p-4 flex flex-col justify-between shadow-sm">
               <div>
                 <span className="text-[9px] text-white/40 uppercase tracking-widest block mb-1 font-mono">High Score</span>
-                <span className="text-lg font-bold font-display text-white">114*</span>
+                <span className="text-lg font-bold font-display text-white text-glow-accent">114*</span>
               </div>
               <span className="text-[9px] text-accent font-semibold mt-2 flex items-center gap-0.5 font-mono">
                 vs Oxford Academy <ChevronRight className="w-2.5 h-2.5" />
               </span>
             </div>
-            <div className="bg-black/40 border border-white/5 rounded-xl p-4 flex flex-col justify-between">
+            <div className="bg-black/40 border border-white/5 rounded-xl p-4 flex flex-col justify-between shadow-sm">
               <div>
                 <span className="text-[9px] text-white/40 uppercase tracking-widest block mb-1 font-mono">Centuries</span>
-                <span className="text-lg font-bold font-display text-white">3</span>
+                <span className="text-lg font-bold font-display text-white text-glow-accent">3</span>
               </div>
               <span className="text-[9px] text-white/40 mt-2 block font-mono">11 Half-Centuries</span>
             </div>
-            <div className="bg-black/40 border border-white/5 rounded-xl p-4 flex flex-col justify-between">
+            <div className="bg-black/40 border border-white/5 rounded-xl p-4 flex flex-col justify-between shadow-sm">
               <div>
                 <span className="text-[9px] text-white/40 uppercase tracking-widest block mb-1 font-mono">Wickets Taken</span>
-                <span className="text-lg font-bold font-display text-white">14</span>
+                <span className="text-lg font-bold font-display text-white text-glow-accent">14</span>
               </div>
               <span className="text-[9px] text-accent font-semibold mt-2 font-mono">Right-arm Off-break</span>
             </div>
-            <div className="bg-black/40 border border-white/5 rounded-xl p-4 flex flex-col justify-between">
+            <div className="bg-black/40 border border-white/5 rounded-xl p-4 flex flex-col justify-between shadow-sm">
               <div>
                 <span className="text-[9px] text-white/40 uppercase tracking-widest block mb-1 font-mono">Bowling best</span>
-                <span className="text-lg font-bold font-display text-white">3 / 24</span>
+                <span className="text-lg font-bold font-display text-white text-glow-accent">3 / 24</span>
               </div>
               <span className="text-[9px] text-white/40 mt-2 block font-mono">GCU T20 Series</span>
             </div>

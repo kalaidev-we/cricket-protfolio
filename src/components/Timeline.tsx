@@ -82,9 +82,9 @@ export default function Timeline({ phase = "all" }: TimelineProps) {
 
   return (
     <section className="relative w-full py-4" id={`timeline-${phase}`}>
-      {/* Central Thin Metallic Line */}
-      <div className="absolute left-[31px] md:left-1/2 top-8 bottom-8 w-[0.5px] bg-white/10 -translate-x-1/2 hidden md:block" />
-      <div className="absolute left-[31px] top-8 bottom-8 w-[0.5px] bg-white/10 md:hidden" />
+      {/* Central Thin Metallic Line (Scoreboard Blue Gradient) */}
+      <div className="absolute left-[31px] md:left-1/2 top-8 bottom-8 w-[0.5px] bg-gradient-to-b from-accent/20 via-accent/60 to-accent/20 -translate-x-1/2 hidden md:block" />
+      <div className="absolute left-[31px] top-8 bottom-8 w-[0.5px] bg-gradient-to-b from-accent/20 via-accent/60 to-accent/20 md:hidden" />
 
       <div className="flex flex-col gap-12 md:gap-20 relative">
         {filteredMilestones.map((milestone, idx) => {
@@ -101,9 +101,9 @@ export default function Timeline({ phase = "all" }: TimelineProps) {
                 isEven ? "md:flex-row-reverse" : ""
               }`}
             >
-              {/* Central Minimalist Gold Dot */}
+              {/* Central Minimalist Cyan Glow Node */}
               <div className="absolute left-[31px] md:left-1/2 top-3 -translate-x-1/2 z-20">
-                <div className="w-7 h-7 rounded-full bg-primary border-[0.5px] border-accent/40 flex items-center justify-center text-accent hover:border-accent transition-colors duration-300">
+                <div className="w-7 h-7 rounded-full bg-primary border-[0.5px] border-accent/40 flex items-center justify-center text-accent hover:border-accent transition-colors duration-300 shadow-[0_0_8px_rgba(56,189,248,0.2)]">
                   <div className="w-1.5 h-1.5 rounded-full bg-accent" />
                 </div>
               </div>
@@ -115,7 +115,7 @@ export default function Timeline({ phase = "all" }: TimelineProps) {
                   onClick={() => setSelectedMilestone(milestone)}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-accent text-base font-bold font-mono tracking-wider">
+                    <span className="text-accent text-base font-bold font-mono tracking-wider text-glow-accent">
                       {milestone.year}
                     </span>
                     <span className="text-[9px] text-white/30 uppercase tracking-widest font-mono group-hover:text-accent transition-colors flex items-center gap-0.5">
@@ -162,7 +162,7 @@ export default function Timeline({ phase = "all" }: TimelineProps) {
             </button>
 
             <div className="flex items-center gap-2 mb-4 pb-2 border-b border-white/5">
-              <span className="text-accent text-xl font-bold font-mono tracking-wide">
+              <span className="text-accent text-xl font-bold font-mono tracking-wide text-glow-accent">
                 {selectedMilestone.year}
               </span>
               <span className="text-white/20 text-xs">•</span>
@@ -178,7 +178,7 @@ export default function Timeline({ phase = "all" }: TimelineProps) {
             <div className="flex items-center justify-between bg-black/40 border border-white/5 p-3 rounded-lg">
               <div>
                 <span className="text-[8px] text-white/40 uppercase tracking-widest block mb-0.5">Focus Metric</span>
-                <span className="text-lg font-bold text-accent font-mono">{selectedMilestone.stat}</span>
+                <span className="text-lg font-bold text-accent font-mono text-glow-accent">{selectedMilestone.stat}</span>
               </div>
               <div className="text-right">
                 <span className="text-[8px] text-white/40 uppercase tracking-widest block mb-0.5">Timeline Benchmark</span>

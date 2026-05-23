@@ -105,9 +105,12 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="text-center relative z-10"
             >
-              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-widest font-display text-white uppercase mb-6">
+              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-widest font-display text-white uppercase mb-2">
                 JAIVIGENESH
               </h1>
+              <div className="text-accent/60 font-mono text-[9px] tracking-[0.25em] uppercase mb-6 font-bold">
+                CALIBRATING METRICS
+              </div>
               <div className="text-accent font-mono text-[11px] tracking-[0.25em] uppercase font-bold text-glow-accent">
                 {loadPercent}%
               </div>
@@ -120,18 +123,19 @@ export default function Home() {
         <div className="w-full flex flex-col relative z-20">
           
           {/* Header Navigation: Minimal floating navbar with blur effect */}
-          <header className="fixed top-4 left-1/2 -translate-x-1/2 z-40 bg-secondary/40 backdrop-blur-md border border-white/5 py-2.5 px-6 rounded-full flex gap-6 md:gap-12 items-center transition-all duration-300 w-[90%] max-w-[550px] justify-between shadow-[0_4px_30px_rgba(0,0,0,0.4)]">
+          <header className="fixed top-4 left-1/2 -translate-x-1/2 z-40 bg-secondary/40 backdrop-blur-md border border-white/5 py-2.5 px-6 rounded-full flex gap-6 md:gap-12 items-center transition-all duration-300 w-[90%] max-w-[620px] justify-between shadow-[0_4px_30px_rgba(0,0,0,0.4)]">
             <div className="flex items-center gap-2">
               <span className="text-accent font-black tracking-wider text-[10px] font-mono border border-accent/20 px-2 py-0.5 rounded">
                 JAIVI #284
               </span>
             </div>
 
-            <nav className="hidden sm:flex items-center gap-6 text-[9px] font-bold uppercase tracking-widest text-white/50">
-              <button onClick={() => scrollToSection("beginning")} className="hover:text-accent transition-colors">Origins</button>
+            <nav className="hidden sm:flex items-center gap-4 md:gap-6 text-[9px] font-bold uppercase tracking-widest text-white/50">
+              <button onClick={() => scrollToSection("beginning")} className="hover:text-accent transition-colors">Beginning</button>
               <button onClick={() => scrollToSection("grind")} className="hover:text-accent transition-colors">Grind</button>
-              <button onClick={() => scrollToSection("rise")} className="hover:text-accent transition-colors">Performance</button>
-              <button onClick={() => scrollToSection("clinch")} className="hover:text-accent transition-colors">Pressure</button>
+              <button onClick={() => scrollToSection("moments")} className="hover:text-accent transition-colors">Moments</button>
+              <button onClick={() => scrollToSection("statistics")} className="hover:text-accent transition-colors">Stats</button>
+              <button onClick={() => scrollToSection("achievements")} className="hover:text-accent transition-colors">Achievements</button>
               <button onClick={() => scrollToSection("future")} className="hover:text-accent transition-colors">Future</button>
             </nav>
 
@@ -158,16 +162,16 @@ export default function Home() {
               {/* Text Area (Left) */}
               <div className="lg:col-span-6 flex flex-col justify-center text-left">
                 <span className="text-accent text-[9px] font-bold tracking-[0.3em] uppercase block mb-3 font-mono">
-                  Apple & Nike Athletics Case Study
+                  Every run. Every scar. Every dream.
                 </span>
                 
                 <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.9] uppercase font-display text-white mb-6">
-                  Not Just
+                  More Than
                   <span className="block text-accent text-glow-accent">A Cricketer.</span>
                 </h1>
 
                 <p className="text-xs md:text-sm text-white/50 leading-relaxed max-w-md mb-8">
-                  A journey built through discipline, silence, pressure and passion.
+                  An immersive journey through passion, discipline, pressure and legacy.
                 </p>
 
                 <div className="flex flex-wrap gap-4 items-center">
@@ -222,17 +226,22 @@ export default function Home() {
           </section>
 
           {/* MAIN PAGE STORYTELLING SECTIONS */}
-          <main className="w-full max-w-5xl mx-auto px-6 md:px-12 flex flex-col py-12">
+          <main className="w-full max-w-5xl mx-auto px-6 md:px-12 flex flex-col py-12 gap-16 md:gap-24">
             
-            {/* CHAPTER 1: THE BEGINNING (Origins) */}
-            <section className="py-20 md:py-28 flex flex-col gap-8 border-b border-white/5" id="beginning">
-              <div className="flex items-center gap-4">
+            {/* CHAPTER I: THE BEGINNING (Origins) */}
+            <section className="relative py-20 md:py-28 flex flex-col gap-8 border-b border-white/5 px-6 md:px-12 rounded-2xl bg-gradient-to-b from-primary via-black/60 to-primary overflow-hidden" id="beginning">
+              {/* Tunnel atmosphere vignette */}
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#000000_90%)] pointer-events-none" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-full bg-gradient-to-b from-accent/0 via-accent/10 to-accent/0" />
+              
+              <div className="relative z-10 flex items-center gap-4">
                 <span className="text-accent/30 font-mono text-xs md:text-sm font-bold">01 /</span>
                 <div className="h-[0.5px] flex-1 bg-white/5" />
                 <span className="text-accent text-[9px] font-bold uppercase tracking-widest font-mono">Origins</span>
               </div>
               
-              <div className="max-w-xl mb-4">
+              <div className="relative z-10 max-w-xl mb-4">
+                <span className="text-accent/80 text-[10px] font-mono tracking-widest uppercase block mb-1">Chapter I</span>
                 <h2 className="text-2xl md:text-3xl font-black tracking-tight font-display uppercase mb-4">
                   THE BEGINNING
                 </h2>
@@ -241,18 +250,24 @@ export default function Home() {
                 </p>
               </div>
 
-              <Timeline phase="beginning" />
+              <div className="relative z-10">
+                <Timeline phase="beginning" />
+              </div>
             </section>
 
-            {/* CHAPTER 2: THE GRIND (Preparation) */}
-            <section className="py-20 md:py-28 flex flex-col gap-8 border-b border-white/5" id="grind">
-              <div className="flex items-center gap-4">
+            {/* CHAPTER II: THE GRIND (Preparation) */}
+            <section className="relative py-20 md:py-28 flex flex-col gap-8 border-b border-white/5 px-6 md:px-12 rounded-2xl bg-secondary/10 overflow-hidden" id="grind">
+              {/* Soft spotlight reveal background effect */}
+              <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[350px] h-[350px] bg-accent-light/3 rounded-full filter blur-[120px] pointer-events-none" />
+              
+              <div className="flex items-center gap-4 relative z-10">
                 <span className="text-accent/30 font-mono text-xs md:text-sm font-bold">02 /</span>
                 <div className="h-[0.5px] flex-1 bg-white/5" />
                 <span className="text-accent text-[9px] font-bold uppercase tracking-widest font-mono">Preparation</span>
               </div>
 
-              <div className="max-w-xl mb-4">
+              <div className="max-w-xl mb-4 relative z-10">
+                <span className="text-accent/80 text-[10px] font-mono tracking-widest uppercase block mb-1">Chapter II</span>
                 <h2 className="text-2xl md:text-3xl font-black tracking-tight font-display uppercase mb-4">
                   THE GRIND
                 </h2>
@@ -261,80 +276,123 @@ export default function Home() {
                 </p>
               </div>
 
-              <Timeline phase="grind" />
+              <div className="relative z-10">
+                <Timeline phase="grind" />
+              </div>
               
-              <div className="mt-8 w-full">
+              <div className="mt-8 w-full relative z-10">
+                <div className="text-center mb-6">
+                  <span className="text-[9px] text-accent/50 uppercase tracking-widest font-mono font-bold">Biomechanical Evaluation</span>
+                  <h3 className="text-lg font-bold font-display uppercase text-white mt-1">Stance Analysis Engine</h3>
+                </div>
                 <AIStanceAnalyzer />
               </div>
             </section>
 
-            {/* CHAPTER 3: THE RISE (Performance) */}
-            <section className="py-20 md:py-28 flex flex-col gap-8 border-b border-white/5" id="rise">
-              <div className="flex items-center gap-4">
-                <span className="text-accent/30 font-mono text-xs md:text-sm font-bold">03 /</span>
-                <div className="h-[0.5px] flex-1 bg-white/5" />
-                <span className="text-accent text-[9px] font-bold uppercase tracking-widest font-mono">Performance</span>
-              </div>
-
-              <div className="max-w-xl mb-4">
-                <h2 className="text-2xl md:text-3xl font-black tracking-tight font-display uppercase mb-4">
-                  THE RISE
-                </h2>
-                <p className="text-xs md:text-sm text-white/60 leading-relaxed">
-                  The transition from nets to local league and collegiate championship dominance. Verified averages, strike rates, match highlights, and trophies.
-                </p>
-              </div>
-
-              <StatsDashboard />
+            {/* CHAPTER III: MATCH MOMENTS (Tension) */}
+            <section className="relative py-20 md:py-28 flex flex-col gap-8 border-b border-white/5 px-6 md:px-12 rounded-2xl overflow-hidden" id="moments">
+              {/* Stadium crowd flash effects background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-black/40 to-primary/80 pointer-events-none" />
+              {/* Subtle ambient light flash animation simulated in CSS */}
+              <div className="absolute inset-0 bg-white/[0.01] mix-blend-overlay pointer-events-none animate-pulse-slow" />
               
-              <div className="mt-8">
-                <Achievements />
-              </div>
-            </section>
-
-            {/* CHAPTER 4: PRESSURE CREATES LEGENDS (The Clinch) */}
-            <section className="py-20 md:py-28 flex flex-col gap-8 border-b border-white/5" id="clinch">
-              <div className="flex items-center gap-4">
-                <span className="text-accent/30 font-mono text-xs md:text-sm font-bold">04 /</span>
+              <div className="flex items-center gap-4 relative z-10">
+                <span className="text-accent/30 font-mono text-xs md:text-sm font-bold">03 /</span>
                 <div className="h-[0.5px] flex-1 bg-white/5" />
                 <span className="text-accent text-[9px] font-bold uppercase tracking-widest font-mono">Tension</span>
               </div>
 
-              <div className="max-w-xl mb-4">
+              <div className="max-w-xl mb-4 relative z-10">
+                <span className="text-accent/80 text-[10px] font-mono tracking-widest uppercase block mb-1">Chapter III</span>
                 <h2 className="text-2xl md:text-3xl font-black tracking-tight font-display uppercase mb-4">
-                  PRESSURE CREATES LEGENDS
+                  MATCH MOMENTS
                 </h2>
                 <p className="text-xs md:text-sm text-white/60 leading-relaxed">
-                  The crease at the final ball. 95,000 heartbeats. When reflexes must bypass thought. Enter the clinch.
+                  The crease at the final ball. 95,000 heartbeats. When reflexes must bypass thought. Step up to face the ultimate test.
                 </p>
               </div>
 
-              <PressureMode />
+              <div className="relative z-10 w-full">
+                <PressureMode />
+              </div>
             </section>
 
-            {/* CHAPTER 5: THE FUTURE (Vision) */}
-            <section className="py-20 md:py-28 flex flex-col gap-8" id="future">
-              <div className="flex items-center gap-4">
+            {/* CHAPTER IV: STATISTICS (Analytics) */}
+            <section className="relative py-20 md:py-28 flex flex-col gap-8 border-b border-white/5 px-6 md:px-12 rounded-2xl bg-secondary/5 overflow-hidden" id="statistics">
+              <div className="flex items-center gap-4 relative z-10">
+                <span className="text-accent/30 font-mono text-xs md:text-sm font-bold">04 /</span>
+                <div className="h-[0.5px] flex-1 bg-white/5" />
+                <span className="text-accent text-[9px] font-bold uppercase tracking-widest font-mono">Analytics</span>
+              </div>
+
+              <div className="max-w-xl mb-4 relative z-10">
+                <span className="text-accent/80 text-[10px] font-mono tracking-widest uppercase block mb-1">Chapter IV</span>
+                <h2 className="text-2xl md:text-3xl font-black tracking-tight font-display uppercase mb-4">
+                  STATISTICS
+                </h2>
+                <p className="text-xs md:text-sm text-white/60 leading-relaxed">
+                  Data-driven dominance. An overview of tournament runs, batting averages, strike rates, and split-second scoring patterns.
+                </p>
+              </div>
+
+              <div className="relative z-10 w-full">
+                <StatsDashboard />
+              </div>
+            </section>
+
+            {/* CHAPTER V: ACHIEVEMENTS (Legacy) */}
+            <section className="relative py-20 md:py-28 flex flex-col gap-8 border-b border-white/5 px-6 md:px-12 rounded-2xl overflow-hidden" id="achievements">
+              {/* Premium luxury background gradient with soft light reflections */}
+              <div className="absolute top-1/2 right-1/4 w-[300px] h-[300px] bg-accent/2 rounded-full filter blur-[120px] pointer-events-none" />
+              
+              <div className="flex items-center gap-4 relative z-10">
                 <span className="text-accent/30 font-mono text-xs md:text-sm font-bold">05 /</span>
+                <div className="h-[0.5px] flex-1 bg-white/5" />
+                <span className="text-accent text-[9px] font-bold uppercase tracking-widest font-mono">Legacy</span>
+              </div>
+
+              <div className="max-w-xl mb-4 relative z-10">
+                <span className="text-accent/80 text-[10px] font-mono tracking-widest uppercase block mb-1">Chapter V</span>
+                <h2 className="text-2xl md:text-3xl font-black tracking-tight font-display uppercase mb-4">
+                  ACHIEVEMENTS
+                </h2>
+                <p className="text-xs md:text-sm text-white/60 leading-relaxed">
+                  Honoring the milestones. From early junior merit citations in Vellore to captaincy records and tournament MVPs.
+                </p>
+              </div>
+
+              <div className="relative z-10 w-full">
+                <Achievements />
+              </div>
+            </section>
+
+            {/* CHAPTER VI: FUTURE VISION (Vision) */}
+            <section className="relative py-20 md:py-28 flex flex-col gap-8 px-6 md:px-12 rounded-2xl overflow-hidden" id="future">
+              {/* Empty stadium spotlight ambient feel */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-accent-light/[0.015] rounded-full filter blur-[130px] pointer-events-none" />
+              
+              <div className="flex items-center gap-4 relative z-10">
+                <span className="text-accent/30 font-mono text-xs md:text-sm font-bold">06 /</span>
                 <div className="h-[0.5px] flex-1 bg-white/5" />
                 <span className="text-accent text-[9px] font-bold uppercase tracking-widest font-mono">Vision</span>
               </div>
 
-              <div className="max-w-xl mb-4">
+              <div className="max-w-xl mb-4 relative z-10">
+                <span className="text-accent/80 text-[10px] font-mono tracking-widest uppercase block mb-1">Chapter VI</span>
                 <h2 className="text-2xl md:text-3xl font-black tracking-tight font-display uppercase mb-4">
-                  THE FUTURE
+                  FUTURE VISION
                 </h2>
                 <p className="text-xs md:text-sm text-white/60 leading-relaxed">
-                  Pioneering sports business, training next-generation talent through computer-vision stance diagnostics, and taking on professional test leagues.
+                  Aspirations beyond the crease. Developing computer-vision stance tracking tools, entering professional tests leagues, and merging sports management with modern analytics.
                 </p>
               </div>
 
-              <div className="w-full">
+              <div className="relative z-10 w-full">
                 <Gallery />
               </div>
 
               {/* Bottom Quote & Contact links */}
-              <div className="flex flex-col gap-12 mt-16 border-t border-white/5 pt-16">
+              <div className="flex flex-col gap-12 mt-16 border-t border-white/5 pt-16 relative z-10">
                 
                 {/* Motto quote */}
                 <div className="text-center py-6 max-w-xl mx-auto relative">

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Zap, Volume2, VolumeX, AlertTriangle, Play, RotateCcw, ShieldAlert, Award } from "lucide-react";
+import { Volume2, VolumeX, AlertTriangle, Play, RotateCcw, ShieldAlert, Award } from "lucide-react";
 import AudioEngine from "./AudioEngine";
 import confetti from "canvas-confetti";
 
@@ -13,7 +13,7 @@ export default function PressureMode() {
   const [isMuted, setIsMuted] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Sync mute state with AudioEngine
+  // Sync mute state
   useEffect(() => {
     setIsMuted(AudioEngine.getMuteState());
   }, []);
@@ -76,7 +76,7 @@ export default function PressureMode() {
           particleCount: 150,
           spread: 80,
           origin: { y: 0.6 },
-          colors: ["#d4af37", "#ffffff", "#000000"],
+          colors: ["#38bdf8", "#ffffff", "#050816"],
         });
       }, 300);
     } else {
@@ -169,7 +169,7 @@ export default function PressureMode() {
             <ShieldAlert className="w-4.5 h-4.5" />
           </div>
           <div>
-            <span className={`text-[9px] font-bold tracking-widest uppercase transition-colors duration-500 font-mono ${isActive ? "text-accent-red text-glow-red" : "text-accent"}`}>
+            <span className={`text-[9px] font-bold tracking-widest uppercase transition-colors duration-500 font-mono ${isActive ? "text-accent-red text-glow-red" : "text-accent text-glow-accent"}`}>
               {isActive ? "Tension Experience Active" : "Interactive Simulation"}
             </span>
             <h2 className="text-xl font-bold tracking-tight mt-0.5 font-display">
@@ -179,7 +179,7 @@ export default function PressureMode() {
         </div>
         <button
           onClick={handleMuteToggle}
-          className="p-2 rounded bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
+          className="p-2 rounded bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all border border-white/5"
         >
           {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
         </button>
@@ -208,7 +208,7 @@ export default function PressureMode() {
         {gameState === "playing" && (
           <div className="w-full text-center flex flex-col items-center">
             <div className="flex items-center gap-1.5 px-3 py-1 bg-accent-red/10 border border-accent-red/20 rounded-full mb-6">
-              <span className="w-1 h-1 bg-accent-red rounded-full animate-ping" />
+              <span className="w-1.5 h-1.5 bg-accent-red rounded-full animate-ping" />
               <span className="text-[8px] text-accent-red font-bold tracking-widest uppercase font-mono">
                 Decide Now: Yorker Pitching Outside Off Stump
               </span>
@@ -262,7 +262,7 @@ export default function PressureMode() {
           <div className="text-center max-w-lg flex flex-col items-center">
             {outcome.success ? (
               <div className="w-10 h-10 bg-accent/10 border border-accent/30 rounded-full flex items-center justify-center text-accent mb-4 animate-bounce">
-                <Award className="w-5 h-5" />
+                <Award className="w-5 h-5 text-glow-accent" />
               </div>
             ) : (
               <div className="w-10 h-10 bg-accent-red/10 border border-accent-red/30 rounded-full flex items-center justify-center text-accent-red mb-4">
