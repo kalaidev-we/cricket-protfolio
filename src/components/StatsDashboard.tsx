@@ -14,7 +14,6 @@ interface StatItemProps {
 // Custom Counter hook/component for premium count-up effect
 function AnimatedCounter({ label, value, suffix = "", decimals = 0, duration = 1500 }: StatItemProps) {
   const [count, setCount] = useState(0);
-  const countRef = useRef(0);
   
   useEffect(() => {
     let start = 0;
@@ -28,7 +27,6 @@ function AnimatedCounter({ label, value, suffix = "", decimals = 0, duration = 1
     const timer = setInterval(() => {
       step++;
       const progress = step / totalSteps;
-      // Ease out quad formula
       const easeProgress = progress * (2 - progress);
       const currentVal = start + (end - start) * easeProgress;
       
@@ -44,7 +42,7 @@ function AnimatedCounter({ label, value, suffix = "", decimals = 0, duration = 1
   }, [value, duration]);
 
   return (
-    <div className="bg-white/5 border border-white/5 hover:border-accent/10 rounded-xl p-5 transition-all duration-300 group hover:bg-white/[0.07]">
+    <div className="bg-white/5 border border-white/5 hover:border-accent/15 rounded-xl p-5 transition-all duration-300 group hover:bg-white/[0.07]">
       <span className="text-white/40 text-[10px] md:text-xs font-semibold tracking-widest uppercase block mb-1">
         {label}
       </span>
@@ -64,18 +62,18 @@ export default function StatsDashboard() {
     desc: string;
   } | null>(null);
 
-  // Wagon wheel regions data
+  // Wagon wheel regions data (customized for Jaivigenesh's profile)
   const regions = [
-    { id: "third_man", name: "Third Man", runs: 594, percent: "8%", desc: "Delicate cuts and reverse sweeps playing behind square off-side.", path: "M 100 80 L 150 30 A 70 70 0 0 0 100 10 Z" },
-    { id: "covers", name: "Covers & Point", runs: 1780, percent: "24%", desc: "Textbook cover drives and square cuts targeting the off-side gaps.", path: "M 100 80 L 190 80 A 90 90 0 0 0 150 30 Z" },
-    { id: "mid_off", name: "Mid Off", runs: 1039, percent: "14%", desc: "Straight punches and lofts driven down the ground off-side.", path: "M 100 80 L 100 170 A 90 90 0 0 0 190 80 Z" },
-    { id: "mid_on", name: "Mid On", runs: 890, percent: "12%", desc: "On-drives and straight pushes on the leg-side down the ground.", path: "M 100 80 L 10 80 A 90 90 0 0 0 100 170 Z" },
-    { id: "mid_wicket", name: "Mid Wicket & Cow Corner", runs: 2078, percent: "28%", desc: "Aggressive pulls, slog sweeps, and wristy flicks towards the leg-side fence.", path: "M 100 80 L 50 30 A 90 90 0 0 0 10 80 Z" },
-    { id: "fine_leg", name: "Fine Leg / Square Leg", runs: 1039, percent: "14%", desc: "Flicks off the pads, glances, and sweeps playing behind square leg-side.", path: "M 100 80 L 100 10 A 70 70 0 0 0 50 30 Z" }
+    { id: "third_man", name: "Third Man", runs: 147, percent: "8%", desc: "Deft cuts and backward touches playing behind square on the off-side.", path: "M 100 80 L 150 30 A 70 70 0 0 0 100 10 Z" },
+    { id: "covers", name: "Covers & Point", runs: 441, percent: "24%", desc: "Dynamic cover drives and punchy square cuts piercing the off-side field.", path: "M 100 80 L 190 80 A 90 90 0 0 0 150 30 Z" },
+    { id: "mid_off", name: "Mid Off", runs: 258, percent: "14%", desc: "Straight punches and lofts driven down the ground off-side.", path: "M 100 80 L 100 170 A 90 90 0 0 0 190 80 Z" },
+    { id: "mid_on", name: "Mid On", runs: 221, percent: "12%", desc: "On-drives and straight pushes on the leg-side down the pitch.", path: "M 100 80 L 10 80 A 90 90 0 0 0 100 170 Z" },
+    { id: "mid_wicket", name: "Mid Wicket & Cow Corner", runs: 515, percent: "28%", desc: "Wristy flicks off pads, pulls, and sweeps targeting the leg-side fence.", path: "M 100 80 L 50 30 A 90 90 0 0 0 10 80 Z" },
+    { id: "fine_leg", name: "Fine Leg / Square Leg", runs: 258, percent: "14%", desc: "Glances off the pads and sweep shots playing behind square on the leg-side.", path: "M 100 80 L 100 10 A 70 70 0 0 0 50 30 Z" }
   ];
 
-  // Performance line chart coordinates (simulating last 8 series runs)
-  const chartData = [340, 520, 410, 680, 590, 890, 720, 940];
+  // Performance line chart coordinates (Last 8 University League matches: 42, 68, 114, 55, 87, 98, 73, 91)
+  const chartData = [42, 68, 114, 55, 87, 98, 73, 91];
   const chartWidth = 500;
   const chartHeight = 120;
   const padding = 20;
@@ -83,8 +81,7 @@ export default function StatsDashboard() {
   // Calculate SVG polyline points
   const points = chartData.map((val, index) => {
     const x = padding + (index / (chartData.length - 1)) * (chartWidth - padding * 2);
-    // Inverse y coordinate for SVG
-    const y = chartHeight - padding - ((val - 200) / 800) * (chartHeight - padding * 2);
+    const y = chartHeight - padding - ((val - 20) / 100) * (chartHeight - padding * 2);
     return `${x},${y}`;
   }).join(" ");
 
@@ -99,21 +96,21 @@ export default function StatsDashboard() {
             <BarChart2 className="w-4 h-4" /> Career Analytics
           </span>
           <h2 className="text-2xl md:text-3xl font-bold tracking-tight mt-1 font-display">
-            STATISTICAL DOMINANCE
+            STATISTICAL FOCUS
           </h2>
         </div>
         <div className="flex items-center gap-2 text-white/50 text-xs">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>Database Last Updated: Live 2026</span>
+          <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
+          <span>GCU Sports Records: Live 2026</span>
         </div>
       </div>
 
       {/* Career Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <AnimatedCounter label="Matches Played" value={142} />
-        <AnimatedCounter label="Career Runs" value={7420} />
-        <AnimatedCounter label="Batting Average" value={54.55} decimals={2} />
-        <AnimatedCounter label="Strike Rate" value={138.45} decimals={2} />
+        <AnimatedCounter label="Matches Played" value={48} />
+        <AnimatedCounter label="Tournament Runs" value={1840} />
+        <AnimatedCounter label="Batting Average" value={42.79} decimals={2} />
+        <AnimatedCounter label="Strike Rate" value={141.54} decimals={2} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -126,28 +123,24 @@ export default function StatsDashboard() {
           <div className="relative w-full max-w-[280px] aspect-square flex items-center justify-center mb-4">
             {/* Field Boundary Circle */}
             <div className="absolute inset-0 border-2 border-white/10 rounded-full flex items-center justify-center">
-              {/* Inner Circle (30-yard circle) */}
               <div className="w-[66%] aspect-square border border-dashed border-white/10 rounded-full flex items-center justify-center">
-                {/* Pitch representation */}
                 <div className="w-5 h-12 bg-white/10 border border-white/20 rounded-sm" />
               </div>
             </div>
 
-            {/* Interactive SVG Sectors overlaying the field */}
+            {/* Interactive SVG Sectors */}
             <svg 
               viewBox="0 0 200 180" 
               className="absolute inset-0 w-full h-full drop-shadow-[0_0_15px_rgba(11,15,25,0.8)]"
             >
-              {/* Ground markings */}
-              <circle cx="100" cy="80" r="90" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+              <circle cx="100" cy="80" r="90" fill="none" stroke="rgba(0,240,255,0.06)" strokeWidth="1" />
               
-              {/* Sectors */}
               {regions.map((reg) => (
                 <path
                   key={reg.id}
                   d={reg.path}
-                  fill={activeRegion?.name === reg.name ? "rgba(255, 215, 0, 0.25)" : "rgba(255, 255, 255, 0.02)"}
-                  stroke={activeRegion?.name === reg.name ? "#ffd700" : "rgba(255,255,255,0.06)"}
+                  fill={activeRegion?.name === reg.name ? "rgba(0, 240, 255, 0.2)" : "rgba(255, 255, 255, 0.01)"}
+                  stroke={activeRegion?.name === reg.name ? "#00f0ff" : "rgba(0,240,255,0.12)"}
                   strokeWidth={activeRegion?.name === reg.name ? "2" : "1"}
                   className="cursor-pointer transition-all duration-300"
                   onMouseEnter={() => setActiveRegion(reg)}
@@ -155,7 +148,6 @@ export default function StatsDashboard() {
                 />
               ))}
 
-              {/* Pitch representation inside SVG to sit on top */}
               <rect x="96" y="65" width="8" height="30" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.25)" strokeWidth="0.5" rx="1" />
             </svg>
           </div>
@@ -168,7 +160,7 @@ export default function StatsDashboard() {
                   <span className="bg-accent/15 text-accent text-[10px] font-bold px-1.5 py-0.5 rounded font-mono">{activeRegion.percent} runs</span>
                 </div>
                 <p className="text-[11px] text-white/70 max-w-sm leading-relaxed">{activeRegion.desc}</p>
-                <div className="text-[11px] text-accent font-extrabold mt-1 font-mono">{activeRegion.runs} Career Runs</div>
+                <div className="text-[11px] text-accent font-extrabold mt-1 font-mono">{activeRegion.runs} Tournament Runs</div>
               </div>
             ) : (
               <p className="text-xs text-white/40 italic leading-relaxed">
@@ -186,47 +178,46 @@ export default function StatsDashboard() {
               <h3 className="text-sm font-bold uppercase tracking-wider text-white/80 flex items-center gap-2">
                 <TrendingUp className="w-4 h-4 text-accent" /> Run Scoring Trend
               </h3>
-              <span className="text-[10px] text-white/40 font-mono">Last 8 Tournament Series</span>
+              <span className="text-[10px] text-white/40 font-mono">Last 8 Tournament Innings</span>
             </div>
 
             {/* SVG Trend Line Chart */}
             <div className="w-full relative overflow-hidden bg-black/20 rounded-lg p-2 border border-white/5">
               <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} className="w-full h-auto">
-                {/* Horizontal Guide Lines */}
-                <line x1={padding} y1={padding} x2={chartWidth - padding} y2={padding} stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-                <line x1={padding} y1={chartHeight / 2} x2={chartWidth - padding} y2={chartHeight / 2} stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-                <line x1={padding} y1={chartHeight - padding} x2={chartWidth - padding} y2={chartHeight - padding} stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+                <line x1={padding} y1={padding} x2={chartWidth - padding} y2={padding} stroke="rgba(0,240,255,0.03)" strokeWidth="1" />
+                <line x1={padding} y1={chartHeight / 2} x2={chartWidth - padding} y2={chartHeight / 2} stroke="rgba(0,240,255,0.03)" strokeWidth="1" />
+                <line x1={padding} y1={chartHeight - padding} x2={chartWidth - padding} y2={chartHeight - padding} stroke="rgba(0,240,255,0.05)" strokeWidth="1" />
 
                 {/* Glowing Trend Line */}
                 <polyline
                   fill="none"
-                  stroke="#ffd700"
+                  stroke="#00f0ff"
                   strokeWidth="3.5"
                   points={points}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="drop-shadow-[0_0_8px_rgba(255,215,0,0.5)]"
+                  className="drop-shadow-[0_0_8px_rgba(0,240,255,0.5)]"
                 />
 
                 {/* Data Points */}
                 {chartData.map((val, index) => {
                   const x = padding + (index / (chartData.length - 1)) * (chartWidth - padding * 2);
-                  const y = chartHeight - padding - ((val - 200) / 800) * (chartHeight - padding * 2);
+                  const y = chartHeight - padding - ((val - 20) / 100) * (chartHeight - padding * 2);
                   return (
                     <g key={index} className="group/dot cursor-pointer">
                       <circle
                         cx={x}
                         cy={y}
                         r="4"
-                        fill="#0b0f19"
-                        stroke="#ffd700"
+                        fill="#080415"
+                        stroke="#00f0ff"
                         strokeWidth="2"
                       />
                       <circle
                         cx={x}
                         cy={y}
                         r="8"
-                        fill="#ffd700"
+                        fill="#00f0ff"
                         className="opacity-0 group-hover/dot:opacity-20 transition-all duration-200"
                       />
                     </g>
@@ -236,48 +227,44 @@ export default function StatsDashboard() {
             </div>
             
             <div className="flex justify-between text-[9px] text-white/40 font-mono mt-2 px-1">
-              <span>2020 Series</span>
-              <span>2022 Series</span>
-              <span>2024 Series</span>
-              <span>Current (2026)</span>
+              <span>Match 1</span>
+              <span>Match 3</span>
+              <span>Match 5</span>
+              <span>GCU Final Match</span>
             </div>
           </div>
 
           {/* Highlights & Additional Stats */}
           <div className="grid grid-cols-2 gap-4">
-            {/* Box 1 */}
             <div className="bg-white/5 border border-white/5 rounded-xl p-4 flex flex-col justify-between">
               <div>
                 <span className="text-[10px] text-white/40 uppercase tracking-widest block mb-1">High Score</span>
-                <span className="text-xl font-bold font-display text-white">183*</span>
+                <span className="text-xl font-bold font-display text-white">114*</span>
               </div>
               <span className="text-[10px] text-accent font-medium mt-2 flex items-center gap-0.5">
-                vs Australia <ChevronRight className="w-3 h-3" />
+                vs Oxford Academy <ChevronRight className="w-3 h-3" />
               </span>
             </div>
-            {/* Box 2 */}
             <div className="bg-white/5 border border-white/5 rounded-xl p-4 flex flex-col justify-between">
               <div>
                 <span className="text-[10px] text-white/40 uppercase tracking-widest block mb-1">Centuries</span>
-                <span className="text-xl font-bold font-display text-white">18</span>
+                <span className="text-xl font-bold font-display text-white">3</span>
               </div>
-              <span className="text-[10px] text-white/40 mt-2 block">42 Half-Centuries</span>
+              <span className="text-[10px] text-white/40 mt-2 block">11 Half-Centuries</span>
             </div>
-            {/* Box 3 */}
             <div className="bg-white/5 border border-white/5 rounded-xl p-4 flex flex-col justify-between">
               <div>
                 <span className="text-[10px] text-white/40 uppercase tracking-widest block mb-1">Wickets Taken</span>
-                <span className="text-xl font-bold font-display text-white">52</span>
+                <span className="text-xl font-bold font-display text-white">14</span>
               </div>
               <span className="text-[10px] text-accent font-medium mt-2">Right-arm Off-break</span>
             </div>
-            {/* Box 4 */}
             <div className="bg-white/5 border border-white/5 rounded-xl p-4 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] text-white/40 uppercase tracking-widest block mb-1">Wicket splits</span>
-                <span className="text-xl font-bold font-display text-white">5 / 18</span>
+                <span className="text-[10px] text-white/40 uppercase tracking-widest block mb-1">Bowling best</span>
+                <span className="text-xl font-bold font-display text-white">3 / 24</span>
               </div>
-              <span className="text-[10px] text-white/40 mt-2 block">Best bowling figures</span>
+              <span className="text-[10px] text-white/40 mt-2 block">GCU T20 Series</span>
             </div>
           </div>
         </div>

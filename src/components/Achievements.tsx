@@ -15,36 +15,36 @@ interface AchievementItem {
 export default function Achievements() {
   const achievements: AchievementItem[] = [
     {
-      title: "National Cap Selection",
+      title: "NBIS Mandur Captaincy",
       icon: <ShieldCheck className="w-8 h-8 text-accent" />,
-      awarder: "International Cricket Board",
-      year: "2023",
-      citation: "Presented with Cap #284 at Lord's Cricket Ground, marking entry into elite international test cricket.",
-      metric: "Test Cap #284"
+      awarder: "New Baldwin International School",
+      year: "2019-2020",
+      citation: "Selected to captain the junior division squad at New Baldwin International School Mandur, leading the team in inter-school tournaments.",
+      metric: "NBIS Team Captain"
     },
     {
-      title: "Player of the Tournament (MVP)",
+      title: "Garden City University MVP",
       icon: <Trophy className="w-8 h-8 text-accent" />,
-      awarder: "Tri-Series Committee",
-      year: "2024",
-      citation: "Awarded MVP for scoring 482 runs in 5 matches, including 2 centuries, leading the team to a series sweep.",
-      metric: "Tri-Series MVP"
-    },
-    {
-      title: "Golden Bat Award",
-      icon: <Award className="w-8 h-8 text-accent" />,
-      awarder: "Premier League Governing Council",
+      awarder: "GCU Sports Board",
       year: "2025",
-      citation: "Awarded for scoring the highest individual runs (860 runs) in the franchise league season at a strike rate of 152.4.",
-      metric: "860 Runs (PL-18)"
+      citation: "Awarded Player of the Tournament (MVP) in the Garden City inter-university championship for aggregate batting score and finishing strikes.",
+      metric: "GCU Tournament MVP"
     },
     {
-      title: "Fastest Century Record",
+      title: "Bangalore Junior Division Gold",
+      icon: <Award className="w-8 h-8 text-accent" />,
+      awarder: "Bangalore Cricket Club Association",
+      year: "2023",
+      citation: "Recognized as the best middle-order batsman in the regional Under-19 tournament with a tournament strike rate of 142.0.",
+      metric: "U-19 Strike Award"
+    },
+    {
+      title: "Vellore Junior Talent Merit",
       icon: <Star className="w-8 h-8 text-accent" />,
-      awarder: "Domestic Cricket Association",
-      year: "2021",
-      citation: "Broke the state record by scoring a century off just 41 balls, hitting 9 sixes and 8 boundaries.",
-      metric: "100 Off 41 Balls"
+      awarder: "Vellore Cricket Federation",
+      year: "2018",
+      citation: "Presented with the Young Hopeful certificate during a summer academy camp in his native town of Vellore.",
+      metric: "Summer Camp Merit"
     }
   ];
 
@@ -56,7 +56,7 @@ export default function Achievements() {
             key={idx}
             className="glassmorphism p-6 rounded-xl border border-white/5 hover:border-accent/30 hover:bg-white/[0.04] transition-all duration-500 relative group overflow-hidden flex flex-col md:flex-row gap-5 items-start"
           >
-            {/* Background design */}
+            {/* Background cyber accent design */}
             <div className="absolute -top-12 -right-12 w-24 h-24 bg-accent/5 rounded-full filter blur-xl group-hover:bg-accent/10 transition-colors" />
 
             {/* Glowing Icon Block */}
@@ -74,7 +74,7 @@ export default function Achievements() {
                     {ach.awarder}
                   </span>
                   <span className="text-white/40 text-[10px] font-mono flex items-center gap-1">
-                    <Calendar className="w-3 h-3" /> {ach.year}
+                    <Calendar className="w-3.5 h-3.5" /> {ach.year}
                   </span>
                 </div>
                 <h3 className="text-white text-base font-extrabold tracking-tight font-display uppercase group-hover:text-accent transition-colors duration-300">
@@ -87,8 +87,8 @@ export default function Achievements() {
 
               {/* Status citation bottom */}
               <div className="flex items-center gap-2 mt-4 text-[11px] text-white/80 font-bold uppercase tracking-wider font-mono">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <span>Verified Metric: <span className="text-accent text-glow-gold">{ach.metric}</span></span>
+                <CheckCircle2 className="w-4 h-4 text-accent-green flex-shrink-0" />
+                <span>Verified Benchmark: <span className="text-accent text-glow-accent">{ach.metric}</span></span>
               </div>
             </div>
           </div>

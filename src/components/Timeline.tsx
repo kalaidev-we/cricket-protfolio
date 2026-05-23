@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Calendar, BookOpen, Star, Trophy, Target, ArrowRight, X } from "lucide-react";
+import { Calendar, BookOpen, Star, Trophy, Target, ArrowRight, X, GraduationCap, MapPin } from "lucide-react";
 
 interface Milestone {
   year: string;
@@ -12,7 +12,6 @@ interface Milestone {
   fullStory: string;
   stat: string;
   statLabel: string;
-  imageAlt: string;
 }
 
 export default function Timeline() {
@@ -20,62 +19,57 @@ export default function Timeline() {
 
   const milestones: Milestone[] = [
     {
-      year: "2012",
-      title: "THE SPARK",
+      year: "2005",
+      title: "VELLORE ORIGINS",
+      icon: <MapPin className="w-5 h-5" />,
+      shortDesc: "Born in Vellore. Relocated to Bangalore to begin a dynamic childhood journey.",
+      fullStory: "Born in historic Vellore in 2005. Shortly after, his family relocated to Bangalore, growing up in the fast-paced, green tech hub. It was on Bangalore's vibrant neighborhood layouts that he first saw cricket played, sparking a lifelong connection to the willow bat.",
+      stat: "2005",
+      statLabel: "Birth Year"
+    },
+    {
+      year: "2009-2013",
+      title: "EARLY INCEPTION",
       icon: <BookOpen className="w-5 h-5" />,
-      shortDesc: "Picking up a tennis ball and a makeshift willow bat on the streets of Mumbai at age 8.",
-      fullStory: "Every legend starts with a spark. In the narrow alleys of Mumbai, under the scorching heat, playing street cricket with a heavy tennis ball. Facing bowlers twice his age, he developed rapid reflexes and a signature wristy flick. It was here that he discovered his passion for the crease and vowed to play for his country.",
-      stat: "Age 8",
-      statLabel: "First Innings Played",
-      imageAlt: "Childhood cricket"
+      shortDesc: "Initial schooling at Bettal School (LKG/UKG) and Sri Mithri English School (1st/2nd Std).",
+      fullStory: "Began his education at Bettal School in Bangalore for LKG and UKG, then moved to Sri Mithri English School for 1st and 2nd standard. Outside the classroom, he was already captaining street matches with tennis balls, learning the basic dynamics of batting.",
+      stat: "4 Years",
+      statLabel: "Early Schooling"
     },
     {
-      year: "2016",
-      title: "THE CRUCIBLE",
-      icon: <Calendar className="w-5 h-5" />,
-      shortDesc: "Enrolling in a premier academy. 4:30 AM mornings, 500 throwdowns a day.",
-      fullStory: "Under the watchful eye of rigorous coaches, the streets were replaced by turf wickets. His days started before sunrise, traveling two hours to train. Facing 500 throwdowns a session, learning to leave the ball outside off, and conditioning his body for long, grueling innings. It was a crucible of sweat, blisters, and mental fortitude.",
-      stat: "10,000+",
-      statLabel: "Practice Hours Logged",
-      imageAlt: "Training nets"
-    },
-    {
-      year: "2020",
-      title: "THE BREAKTHROUGH",
+      year: "2014-2021",
+      title: "MANDUR NET DRILLS",
       icon: <Star className="w-5 h-5" />,
-      shortDesc: "A record-breaking double century in the U-19 state championship. Professional contract signed.",
-      fullStory: "The hard work bore fruit in the State Championship. Walking out at 40/3, he batted for seven hours, scoring a masterclass 202* that caught the eyes of national selectors. It led to his first franchise contract in the Premier League, introducing him to the high-pressure world of floodlit stadiums.",
-      stat: "202*",
-      statLabel: "Highest Under-19 Score",
-      imageAlt: "U-19 Tournament"
+      shortDesc: "Formative school phase at New Baldwin International School Mandur (3rd to 10th Std).",
+      fullStory: "Studied from 3rd to 10th standard at the prestigious New Baldwin International School (NBIS) Mandur. This was the launchpad for his competitive cricket. Playing school leagues and attending academy net sessions, he molded his batting stance under floodlights.",
+      stat: "8 Years",
+      statLabel: "NBIS Mandur Tenure"
     },
     {
-      year: "2023",
-      title: "THE APEX DEBUT",
+      year: "2022-2023",
+      title: "ENGINEERING DRIVE",
+      icon: <GraduationCap className="w-5 h-5" />,
+      shortDesc: "Pivoted into engineering studies, bringing analytical precision into his batting mechanics.",
+      fullStory: "Following high school, he entered engineering studies. The analytical discipline and physical dynamics studied in engineering gave him a unique perspective on batting. He applied vector math and velocity mechanics to his hand-eye coordination drills.",
+      stat: "100%",
+      statLabel: "Analytical Focus"
+    },
+    {
+      year: "2024 & BEYOND",
+      title: "GARDEN CITY APEX",
       icon: <Trophy className="w-5 h-5" />,
-      shortDesc: "Century on National Team debut vs England. Named MVP of the Tri-Series.",
-      fullStory: "Walking out to represent the national team in front of a packed stadium of 90,000 screaming fans. He scored a century on debut (114 off 92 balls), calming his nerves with elegant cover drives and a match-winning helicopter shot in the final over. It solidified his place in the middle-order as a modern-day finisher.",
-      stat: "114",
-      statLabel: "Runs on National Debut",
-      imageAlt: "National Cap Presentation"
-    },
-    {
-      year: "2026 & BEYOND",
-      title: "FUTURE HORIZONS",
-      icon: <Target className="w-5 h-5" />,
-      shortDesc: "Targeting the World Championship captaincy and pioneering AI sports analytics.",
-      fullStory: "The journey does not stop here. As a senior batsman, the goal is to lead the country to a World Championship victory. Off the pitch, he is partnering with technology labs to integrate webcam-based computer vision pose analysis, making elite-level coaching accessible to kids in rural areas.",
-      stat: "#1",
-      statLabel: "Target ICC Ranking",
-      imageAlt: "Future goals"
+      shortDesc: "Studying 4-year BBAB at Garden City University (GCU). Leading university cricket.",
+      fullStory: "Currently pursuing a 4-year BBAB degree at Garden City University (GCU) in Bangalore. Blending athletic business strategy with high-performance captaincy, he leads GCU's batting lineup, targeting inter-university cup trophies.",
+      stat: "4 Years",
+      statLabel: "GCU BBAB Course"
     }
   ];
 
   return (
     <section className="relative w-full py-10" id="journey-timeline">
-      {/* Dynamic line connecting steps */}
-      <div className="absolute left-[31px] md:left-1/2 top-10 bottom-10 w-[2px] bg-gradient-to-b from-accent/40 via-accent to-accent/20 -translate-x-1/2 hidden md:block" />
-      <div className="absolute left-[31px] top-10 bottom-10 w-[2px] bg-gradient-to-b from-accent/40 via-accent to-accent/20 md:hidden" />
+      {/* Central Glowing Cyber Line */}
+      <div className="absolute left-[31px] md:left-1/2 top-10 bottom-10 w-[2px] bg-gradient-to-b from-accent/40 via-accent-green to-accent/20 -translate-x-1/2 hidden md:block" />
+      <div className="absolute left-[31px] top-10 bottom-10 w-[2px] bg-gradient-to-b from-accent/40 via-accent-green to-accent/20 md:hidden" />
 
       <div className="flex flex-col gap-12 md:gap-24 relative">
         {milestones.map((milestone, idx) => {
@@ -92,9 +86,9 @@ export default function Timeline() {
                 isEven ? "md:flex-row-reverse" : ""
               }`}
             >
-              {/* Central Glowing Icon Node */}
+              {/* Central Glowing Cyan Icon Node */}
               <div className="absolute left-[31px] md:left-1/2 top-2 -translate-x-1/2 z-20">
-                <div className="w-8 h-8 rounded-full bg-primary border-2 border-accent flex items-center justify-center text-accent shadow-[0_0_12px_rgba(255,215,0,0.4)] animate-pulse-slow">
+                <div className="w-8 h-8 rounded-full bg-primary border-2 border-accent flex items-center justify-center text-accent shadow-[0_0_12px_rgba(0,240,255,0.4)] animate-pulse-slow">
                   {milestone.icon}
                 </div>
               </div>
@@ -105,7 +99,7 @@ export default function Timeline() {
                      onClick={() => setSelectedMilestone(milestone)}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-accent text-lg font-black font-mono tracking-wide text-glow-gold">
+                    <span className="text-accent text-lg font-black font-mono tracking-wide text-glow-accent">
                       {milestone.year}
                     </span>
                     <span className="text-[10px] text-white/40 uppercase tracking-widest font-mono group-hover:text-accent transition-colors">
@@ -141,7 +135,7 @@ export default function Timeline() {
           onClick={() => setSelectedMilestone(null)}
         >
           <div 
-            className="glassmorphism-gold p-6 md:p-8 rounded-2xl w-full max-w-xl border border-accent/20 relative shadow-2xl overflow-hidden"
+            className="glassmorphism-accent p-6 md:p-8 rounded-2xl w-full max-w-xl border border-accent/25 relative shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Background design */}
@@ -155,10 +149,10 @@ export default function Timeline() {
             </button>
 
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-accent text-2xl font-black font-mono tracking-wide text-glow-gold">
+              <span className="text-accent text-2xl font-black font-mono tracking-wide text-glow-accent">
                 {selectedMilestone.year}
               </span>
-              <span className="w-1.5 h-1.5 bg-accent rounded-full" />
+              <span className="w-1.5 h-1.5 bg-accent-green rounded-full" />
               <h3 className="text-md md:text-lg font-bold tracking-tight uppercase font-display text-white">
                 {selectedMilestone.title}
               </h3>
@@ -170,11 +164,11 @@ export default function Timeline() {
 
             <div className="flex items-center justify-between bg-black/40 border border-white/5 p-4 rounded-xl">
               <div>
-                <span className="text-[10px] text-white/40 uppercase tracking-widest block mb-0.5">Key Metric</span>
-                <span className="text-2xl font-black text-accent font-mono text-glow-gold">{selectedMilestone.stat}</span>
+                <span className="text-[10px] text-white/40 uppercase tracking-widest block mb-0.5">Focus Metric</span>
+                <span className="text-2xl font-black text-accent font-mono text-glow-accent">{selectedMilestone.stat}</span>
               </div>
               <div className="text-right">
-                <span className="text-[10px] text-white/40 uppercase tracking-widest block mb-0.5">Metric Label</span>
+                <span className="text-[10px] text-white/40 uppercase tracking-widest block mb-0.5">Timeline Benchmark</span>
                 <span className="text-xs font-bold text-white uppercase">{selectedMilestone.statLabel}</span>
               </div>
             </div>

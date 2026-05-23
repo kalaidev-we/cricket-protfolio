@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Volume2, VolumeX, Mail, ArrowDownCircle, Trophy, Play, Star, ChevronRight } from "lucide-react";
 import AudioEngine from "@/components/AudioEngine";
 
-// Dynamic import or client components
+// Client-side components
 import ThreeCanvas from "@/components/ThreeCanvas";
 import Timeline from "@/components/Timeline";
 import StatsDashboard from "@/components/StatsDashboard";
@@ -21,7 +21,7 @@ export default function Home() {
   const [active3DView, setActive3DView] = useState<"ball" | "bat">("ball");
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // preloader counter animation
+  // Preloader counter animation
   useEffect(() => {
     let current = 0;
     const interval = setInterval(() => {
@@ -31,7 +31,6 @@ export default function Home() {
         clearInterval(interval);
         setTimeout(() => {
           setLoading(false);
-          // Play subtle entry sound
           AudioEngine.playSwoosh();
         }, 600);
       }
@@ -71,7 +70,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative w-full min-h-screen bg-primary text-white selection:bg-accent selection:text-primary overflow-x-hidden font-sans">
+    <div className="relative w-full min-h-screen bg-primary text-white selection:bg-accent selection:text-primary overflow-x-hidden font-sans cyber-grid">
       <AnimatePresence>
         {loading && (
           <motion.div
@@ -86,11 +85,11 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="text-center relative z-10"
             >
-              <span className="text-accent text-xs font-black tracking-[0.3em] uppercase block mb-3 font-mono">
-                NETFLIX ORIGINAL SERIES
+              <span className="text-accent-green text-xs font-black tracking-[0.3em] uppercase block mb-3 font-mono">
+                T20 CYBER SERIES v2.0
               </span>
-              <h1 className="text-3xl md:text-5xl font-black tracking-widest font-display text-white uppercase text-glow-gold mb-8">
-                THE CREASE
+              <h1 className="text-3xl md:text-5xl font-black tracking-widest font-display text-white uppercase text-glow-accent mb-8">
+                JAIVIGENESH
               </h1>
               
               <div className="w-48 h-[1px] bg-white/10 rounded-full mx-auto relative overflow-hidden mb-3">
@@ -100,8 +99,8 @@ export default function Home() {
                 />
               </div>
               
-              <span className="text-xs text-white/40 font-mono tracking-widest uppercase">
-                Calibrating Biometrics {loadPercent}%
+              <span className="text-[10px] text-accent font-mono tracking-widest uppercase block">
+                CALIBRATING NET BIOMETRICS {loadPercent}%
               </span>
             </motion.div>
           </motion.div>
@@ -113,11 +112,11 @@ export default function Home() {
           {/* Header HUD Navigation */}
           <header className="fixed top-0 left-0 right-0 z-40 bg-primary/60 backdrop-blur-md border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-300">
             <div className="flex items-center gap-3">
-              <span className="text-accent font-black tracking-wider text-sm font-mono border border-accent/20 px-2.5 py-1 rounded">
-                #284
+              <span className="text-accent font-black tracking-wider text-sm font-mono border border-accent/20 px-2.5 py-1 rounded shadow-[0_0_10px_rgba(0,240,255,0.15)]">
+                JAIVI #284
               </span>
-              <span className="font-extrabold tracking-widest text-xs uppercase hidden sm:inline font-display">
-                Athlete Profile
+              <span className="font-extrabold tracking-widest text-xs uppercase hidden sm:inline font-display text-accent-green text-glow-green">
+                GCU Scholar-Athlete
               </span>
             </div>
 
@@ -135,7 +134,7 @@ export default function Home() {
             >
               {isMuted ? (
                 <>
-                  <VolumeX className="w-4 h-4 text-red-500" />
+                  <VolumeX className="w-4 h-4 text-accent-red" />
                   <span className="hidden sm:inline">Unmute Audio</span>
                 </>
               ) : (
@@ -157,44 +156,43 @@ export default function Home() {
               {/* Text Area (Left) */}
               <div className="lg:col-span-6 flex flex-col justify-center text-left">
                 <span className="text-accent text-xs font-bold tracking-[0.3em] uppercase block mb-3 font-mono">
-                  Nike Athlete Campaign
+                  Bangalore-Raised Batting Innovator
                 </span>
                 
                 <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-none uppercase font-display text-white mb-6">
-                  POWER.
-                  <span className="block text-accent text-glow-gold">PRECISION.</span>
-                  LEGACY.
+                  SPEED.
+                  <span className="block text-accent text-glow-accent">PRECISION.</span>
+                  JAIVI.
                 </h1>
 
-                <p className="text-sm md:text-base text-white/60 leading-relaxed max-w-md mb-8">
-                  Step onto the crease with Athlete #284. An immersive sports documentary charting the physical mechanics, career records, and crucial game-winning pressure scenarios of a master cricketer.
+                <p className="text-xs md:text-sm text-white/60 leading-relaxed max-w-md mb-8">
+                  Step onto the crease with Jaivigenesh. An immersive cyber-stadium portfolio charting the physical mechanics, academic timelines, and crucial match-winning finishes of a rising Garden City University all-rounder.
                 </p>
 
                 <div className="flex flex-wrap gap-4 items-center">
                   <button
                     onClick={() => scrollToSection("journey-timeline")}
-                    className="px-6 py-3.5 bg-accent hover:bg-accent-hover text-primary font-black rounded-lg text-xs tracking-widest uppercase transition-all duration-300 shadow-lg shadow-accent/10 hover:shadow-accent/25 hover:scale-[1.02]"
+                    className="px-6 py-3.5 bg-accent hover:bg-accent-hover text-primary font-black rounded-lg text-xs tracking-widest uppercase transition-all duration-300 shadow-lg shadow-accent/15 hover:shadow-accent/25 hover:scale-[1.02]"
                   >
-                    Enter Timeline
+                    Explore Journey
                   </button>
                   <button
                     onClick={() => scrollToSection("pressure-mode")}
                     className="px-6 py-3.5 bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 rounded-lg text-xs font-semibold uppercase tracking-widest transition-all duration-300"
                   >
-                    Simulate Pressure
+                    T20 Pressure Valve
                   </button>
                 </div>
               </div>
 
               {/* 3D WebGL Canvas Area (Right) */}
               <div className="lg:col-span-6 flex flex-col justify-center items-center h-[350px] md:h-[450px] relative">
-                {/* 3D viewport canvas */}
-                <div className="w-full h-full relative rounded-2xl overflow-hidden glassmorphism border border-white/5">
+                <div className="w-full h-full relative rounded-2xl overflow-hidden glassmorphism border border-white/5 shadow-[0_0_30px_rgba(0,240,255,0.06)]">
                   <ThreeCanvas activeView={active3DView} scrollProgress={scrollProgress} />
                 </div>
                 
                 {/* 3D Controller Options bar */}
-                <div className="absolute bottom-4 bg-primary/90 border border-white/15 px-3 py-1.5 rounded-full flex gap-1 z-20 backdrop-blur shadow-md">
+                <div className="absolute bottom-4 bg-primary/95 border border-white/15 px-3 py-1.5 rounded-full flex gap-1 z-20 backdrop-blur shadow-md">
                   <button
                     onClick={() => {
                       AudioEngine.playSwoosh();
@@ -239,7 +237,7 @@ export default function Home() {
                 <span className="text-accent text-xs font-bold uppercase tracking-widest">Chronology</span>
               </div>
               <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight font-display uppercase">
-                THE ATHLETIC RISE
+                THE ACADEMIC & ATHLETIC RISE
               </h2>
               <Timeline />
             </div>
@@ -305,24 +303,24 @@ export default function Home() {
               {/* Sponsorship strip */}
               <div className="flex flex-col items-center gap-4 text-center">
                 <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest">
-                  OFFICIAL BRAND PARTNERS
+                  OFFICIAL SPONSORS & AFFILIATES
                 </span>
                 <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12 text-sm font-extrabold text-white/30 tracking-widest font-display">
-                  <span className="hover:text-white transition-colors duration-300 cursor-pointer">NIKE PERFORMANCE</span>
-                  <span className="hover:text-white transition-colors duration-300 cursor-pointer">BULL STRIKE LAB</span>
-                  <span className="hover:text-white transition-colors duration-300 cursor-pointer">WILLOW & CO</span>
-                  <span className="hover:text-white transition-colors duration-300 cursor-pointer">RED BULL ATHLETE</span>
+                  <span className="hover:text-accent transition-colors duration-300 cursor-pointer">GARDEN CITY GCU</span>
+                  <span className="hover:text-accent transition-colors duration-300 cursor-pointer">NBIS MANDUR NETS</span>
+                  <span className="hover:text-accent transition-colors duration-300 cursor-pointer">BANGALORE COMBAT CLUB</span>
+                  <span className="hover:text-accent transition-colors duration-300 cursor-pointer">WILLOW LABS</span>
                 </div>
               </div>
 
               {/* Motto quote */}
               <div className="text-center py-8 max-w-2xl mx-auto relative">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-[2px] bg-accent/20" />
-                <blockquote className="text-lg md:text-2xl font-semibold italic text-white/80 leading-relaxed font-display">
+                <blockquote className="text-base md:text-xl font-semibold italic text-white/80 leading-relaxed font-display">
                   &ldquo;It&apos;s not about the balls you face on the pitch, but the absolute crease you dominate.&rdquo;
                 </blockquote>
-                <span className="text-accent text-xs font-bold tracking-widest uppercase block mt-3 font-mono">
-                  - THE ATHLETE MOTTO
+                <span className="text-accent text-xs font-bold tracking-widest uppercase block mt-3 font-mono text-glow-accent">
+                  - JAIVI&apos;S MOTTO
                 </span>
               </div>
 
@@ -330,19 +328,19 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-t border-white/5 pt-12">
                 <div>
                   <h3 className="text-2xl font-black font-display tracking-tight uppercase text-white mb-2">
-                    THE LEGEND&apos;S ARENA
+                    JAIVIGENESH.COM
                   </h3>
                   <p className="text-xs text-white/60 leading-relaxed max-w-sm mb-6">
-                    Interested in collaboration, sponsorship opportunities, or media appearances? Send an inquiry or follow on verified channels.
+                    Interested in collegiate leagues, sponsorships, net matchups, or athletic data reviews? Send an inquiry directly.
                   </p>
                   
-                  {/* Signature Logo SVG */}
+                  {/* Signature Logo SVG - JAIVI */}
                   <div className="w-48 h-12 text-accent relative mb-4">
                     <svg viewBox="0 0 200 50" className="w-full h-full fill-none stroke-accent stroke-[2]">
-                      {/* Stylized Signature Curve */}
-                      <path d="M10,40 Q40,5 70,30 T130,10 T180,45" strokeDasharray="300" strokeDashoffset="0" className="animate-pulse-slow" />
-                      <path d="M30,30 Q90,5 150,30" opacity="0.4" />
-                      <text x="15" y="25" fill="#ffffff" stroke="none" className="text-lg font-bold font-mono tracking-widest">ATHLETE</text>
+                      {/* Stylized Signature Curve reading JAIVI */}
+                      <path d="M20,40 C40,5 50,45 60,10 T80,40 T100,15 T130,40 T150,5" strokeDasharray="300" strokeDashoffset="0" className="animate-pulse-slow" />
+                      <path d="M40,30 Q90,5 150,30" opacity="0.2" />
+                      <text x="15" y="25" fill="#ffffff" stroke="none" className="text-lg font-bold font-mono tracking-widest opacity-95">JAIVI</text>
                     </svg>
                   </div>
                 </div>
@@ -353,15 +351,15 @@ export default function Home() {
                   </span>
                   
                   <a
-                    href="mailto:athlete@legendsarena.com"
+                    href="mailto:athlete@jaivigenesh.com"
                     className="flex items-center gap-3 p-4 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/25 rounded-xl transition-all duration-300 group"
                   >
                     <div className="p-2 rounded-lg bg-accent/15 text-accent group-hover:scale-105 transition-transform">
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
-                      <span className="text-xs text-white/50 block">Email Desk</span>
-                      <span className="text-sm font-bold text-white group-hover:text-accent transition-colors font-mono">athlete@legendsarena.com</span>
+                      <span className="text-xs text-white/50 block">Direct Mailbox</span>
+                      <span className="text-sm font-bold text-white group-hover:text-accent transition-colors font-mono">athlete@jaivigenesh.com</span>
                     </div>
                   </a>
 
@@ -400,13 +398,13 @@ export default function Home() {
 
           {/* FOOTER */}
           <footer className="w-full border-t border-white/5 bg-secondary/50 py-8 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center text-[10px] text-white/40 font-mono tracking-wider uppercase gap-4 mt-16">
-            <span>© 2026 THE LEGEND&apos;S ARENA. ALL RIGHTS RESERVED.</span>
+            <span>© 2026 JAIVIGENESH. ALL RIGHTS RESERVED.</span>
             <div className="flex gap-4">
               <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
               <span>•</span>
               <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
               <span>•</span>
-              <a href="#" className="hover:text-white transition-colors">Press Kit</a>
+              <a href="#" className="hover:text-white transition-colors">GCU Sports Desk</a>
             </div>
           </footer>
         </div>
