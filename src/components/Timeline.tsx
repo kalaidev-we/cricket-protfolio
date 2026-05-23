@@ -12,9 +12,14 @@ interface Milestone {
   fullStory: string;
   stat: string;
   statLabel: string;
+  phase: "beginning" | "grind";
 }
 
-export default function Timeline() {
+interface TimelineProps {
+  phase?: "beginning" | "grind" | "all";
+}
+
+export default function Timeline({ phase = "all" }: TimelineProps) {
   const [selectedMilestone, setSelectedMilestone] = useState<Milestone | null>(null);
 
   const milestones: Milestone[] = [
@@ -25,7 +30,8 @@ export default function Timeline() {
       shortDesc: "Born in Vellore. Relocated to Bangalore to begin a dynamic childhood journey.",
       fullStory: "Born in historic Vellore in 2005. Shortly after, his family relocated to Bangalore, growing up in the fast-paced, green tech hub. It was on Bangalore's vibrant neighborhood layouts that he first saw cricket played, sparking a lifelong connection to the willow bat.",
       stat: "2005",
-      statLabel: "Birth Year"
+      statLabel: "Birth Year",
+      phase: "beginning"
     },
     {
       year: "2009-2013",
@@ -34,7 +40,8 @@ export default function Timeline() {
       shortDesc: "Initial schooling at Bettal School (LKG/UKG) and Sri Mithri English School (1st/2nd Std).",
       fullStory: "Began his education at Bettal School in Bangalore for LKG and UKG, then moved to Sri Mithri English School for 1st and 2nd standard. Outside the classroom, he was already captaining street matches with tennis balls, learning the basic dynamics of batting.",
       stat: "4 Years",
-      statLabel: "Early Schooling"
+      statLabel: "Early Schooling",
+      phase: "beginning"
     },
     {
       year: "2014-2021",
@@ -43,7 +50,8 @@ export default function Timeline() {
       shortDesc: "Formative school phase at New Baldwin International School Mandur (3rd to 10th Std).",
       fullStory: "Studied from 3rd to 10th standard at the prestigious New Baldwin International School (NBIS) Mandur. This was the launchpad for his competitive cricket. Playing school leagues and attending academy net sessions, he molded his batting stance under floodlights.",
       stat: "8 Years",
-      statLabel: "NBIS Mandur Tenure"
+      statLabel: "NBIS Mandur Tenure",
+      phase: "grind"
     },
     {
       year: "2022-2023",
@@ -52,33 +60,40 @@ export default function Timeline() {
       shortDesc: "Pivoted into engineering studies, bringing analytical precision into his batting mechanics.",
       fullStory: "Following high school, he entered engineering studies. The analytical discipline and physical dynamics studied in engineering gave him a unique perspective on batting. He applied vector math and velocity mechanics to his hand-eye coordination drills.",
       stat: "100%",
-      statLabel: "Analytical Focus"
+      statLabel: "Analytical Focus",
+      phase: "grind"
     },
     {
       year: "2024 & BEYOND",
       title: "GARDEN CITY UNIVERSITY",
       icon: <Trophy className="w-4.5 h-4.5 text-accent" />,
       shortDesc: "Studying 4-year BBAB at Garden City University (GCU). Leading university cricket.",
-      fullStory: "Currently pursuing a 4-year BBAB degree at Garden City University (GCU) in Bangalore. Blending athletic business strategy with high-performance captaincy, he leads GCU's batting lineup, targeting inter-university cup trophies.",
+      fullStory: "Currently pursuing a 4-year BBAB degree at Garden City University (GCU) in Bangalore. Blending sports management strategies with athletic leadership, he captains GCU's batting line-up, targeting regional championship cups.",
       stat: "4 Years",
-      statLabel: "GCU BBAB Course"
+      statLabel: "GCU BBAB Course",
+      phase: "grind"
     }
   ];
 
+  const filteredMilestones = 
+    phase === "all" 
+      ? milestones 
+      : milestones.filter(m => m.phase === phase);
+
   return (
-    <section className="relative w-full py-6" id="journey-timeline">
-      {/* Central Thin Metallic Line (Apple Style) */}
+    <section className="relative w-full py-4" id={`timeline-${phase}`}>
+      {/* Central Thin Metallic Line */}
       <div className="absolute left-[31px] md:left-1/2 top-8 bottom-8 w-[0.5px] bg-white/10 -translate-x-1/2 hidden md:block" />
       <div className="absolute left-[31px] top-8 bottom-8 w-[0.5px] bg-white/10 md:hidden" />
 
       <div className="flex flex-col gap-12 md:gap-20 relative">
-        {milestones.map((milestone, idx) => {
+        {filteredMilestones.map((milestone, idx) => {
           const isEven = idx % 2 === 0;
 
           return (
             <motion.div
               key={milestone.year}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, ease: "easeOut", delay: idx * 0.05 }}
